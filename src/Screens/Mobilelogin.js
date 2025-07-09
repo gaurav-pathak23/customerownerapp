@@ -129,7 +129,7 @@ const Mobilelogin = ({ navigation }) => {
       <TextInput
         style={styles.textInput}
         placeholder="Mobile Number"
-        placeholderTextColor={Colors.placeholdertxtcolor}
+        placeholderTextColor={Colors.loremtxt}
         keyboardType="number-pad"
         maxLength={10}
         value={number}

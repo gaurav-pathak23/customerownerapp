@@ -14,6 +14,8 @@ import { Colors } from '../Colorfont/Color';
 import { validateEmail,validatePassword } from '../validators';
 const mobileWidth = Dimensions.get('window').width;
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Lang_chg } from '../Language/Language_provider';
+import { config } from '../Language/configProvider';
 const SignIn = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -108,10 +110,10 @@ const validateForm = async () => {
         resizeMode="cover"
       >
         
-<Text style={styles.signintext}>Sign In</Text>
+<Text style={styles.signintext}>{Lang_chg.signin[config.language]}</Text>
       
         
-        <Text style={styles.text}>Enter your details below & Login</Text>
+        <Text style={styles.text}>{Lang_chg.enterDetailsBelow[config.language]}</Text>
         <View style={{ padding: (mobileWidth * 7.2) / 100 }}>
           <View style={styles.tabview}>
             <TouchableOpacity
@@ -130,7 +132,7 @@ const validateForm = async () => {
                   styles.vendortext,
                   { fontWeight: tab === 'Current' ? '700' : '300' },
                 ]} >
-                Worker
+               {Lang_chg.Workertxt[config.language]}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -150,16 +152,23 @@ const validateForm = async () => {
                   { fontWeight: tab === 'Current' ? '300' : '700' },
                 ]}
               >
-                Owner
+                 {Lang_chg.Ownertxt[config.language]}
               </Text>
             </TouchableOpacity>
           </View>
           <View style={styles.bottomline}></View>
 
-          <Text style={styles.Emailtext}>Email Address</Text>
+          {/* <Text style={styles.Emailtext}>Email Address</Text> */}
+          <Text style={styles.Emailtext}>{Lang_chg.EmailAddress[config.language]}</Text>
+
+          {/*  */}
+           {/* <Text style={styles.label}>{Lang_chg.getText('EmailAddress')}</Text>
+      <Text style={styles.label}>{Lang_chg.getText('Password')}</Text>
+      <Text style={styles.label}>{Lang_chg.getText('Login')}</Text> */}
+          {/*  */}
           <TextInput
-            placeholder="Enter Email Address"
-            placeholderTextColor={Colors.placeholdertxtcolor}
+            placeholder={Lang_chg.EnterEmailtxt[config.language]}
+            placeholderTextColor={Colors.loremtxt}
             maxLength={40}
             value={email}
             onChangeText={text => {
@@ -179,11 +188,11 @@ const validateForm = async () => {
             <Text style={styles.errorText}>{errors.email}</Text>
           ) : null}
 
-          <Text style={styles.Emailtext}>Password</Text>
+          <Text style={styles.Emailtext}>{Lang_chg.Passwordtxt[config.language]}</Text>
           <View style={styles.inputWrapper}>
             <TextInput
-              placeholderTextColor={Colors.placeholdertxtcolor}
-              placeholder="Enter Password"
+              placeholderTextColor={Colors.loremtxt}
+              placeholder={Lang_chg.EnterPasswordtxt[config.language]}
               maxLength={30}
               secureTextEntry={secureText}
               value={password}
@@ -222,14 +231,15 @@ const validateForm = async () => {
             </TouchableOpacity>
           </View>
           {errors.password ? (
-            <Text style={styles.errorText}>{errors.password}</Text>
+            <Text style={styles.errorText}>{Lang_chg.enterPasswordError[config.language]}</Text>
+            // <Text style={styles.errorText}>{errors.password}</Text>
           ) : null}
 
           <TouchableOpacity
             activeOpacity={0.8}
             onPress={() => navigation.navigate('ForgotPassword')}
           >
-            <Text style={styles.forgotpasswordtext}> Forgot Password?</Text>
+            <Text style={styles.forgotpasswordtext}>{Lang_chg.forgotPassword[config.language]}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -237,7 +247,7 @@ const validateForm = async () => {
             style={styles.emailloginbutton}
             onPress={validateForm}
           >
-            <Text style={styles.mobileemailtext}>Continue with Email</Text>
+            <Text style={styles.mobileemailtext}>{Lang_chg.continueemaitxt[config.language]}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -245,7 +255,7 @@ const validateForm = async () => {
             activeOpacity={0.8}
             style={styles.mobileloginbutton}
           >
-            <Text style={styles.mobileemailtext}>Continue with Mobile</Text>
+            <Text style={styles.mobileemailtext}>{Lang_chg.continueMobiletxt[config.language]}</Text>
           </TouchableOpacity>
 
           <View style={styles.socialloginview}>
@@ -275,9 +285,9 @@ const validateForm = async () => {
               marginTop: (mobileWidth * 6) / 100,
             }}
           >
-            <Text style={styles.text}> if you do not have account? </Text>
+            <Text style={styles.text}>{Lang_chg.dontHaveAccount[config.language]}</Text>
             <TouchableOpacity  onPress={() => navigation.navigate('SignUp')}>
-            <Text style={styles.signuptext}>Sign Up</Text>
+            <Text style={styles.signuptext}>{Lang_chg.signup[config.language]}</Text>
             </TouchableOpacity>
           </View>
         </View>

@@ -156,7 +156,7 @@ const validateForm = async () => {
           <Text style={styles.Emailtext}>Email Address</Text>
           <TextInput
             placeholder="Enter Email Address"
-            placeholderTextColor={Colors.placeholdertxtcolor}
+            placeholderTextColor={Colors.loremtxt}
             maxLength={40}
             value={email}
             onChangeText={text => {

@@ -1,5 +1,6 @@
 
-
+import { Lang_chg } from "./Language/Language_provider";
+import { config } from "./Language/configProvider";
 export const regex = {
   image: /\.(jpg|jpeg|png)$/i,
   email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, // Simplified and correct email regex
@@ -14,7 +15,7 @@ export const regex = {
   address: /^[a-zA-Z0-9\s,.'-]{5,}$/,
   name: /^[a-zA-Z\s]{2,}$/,
   Aadhar:/^[2-9]{1}[0-9]{11}$/,
-dob : /^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(19|20)\d{2}$/,
+  dob : /^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(19|20)\d{2}$/,
 
 };
 
@@ -43,7 +44,7 @@ export const validatedob = (dob) => {
 };
 export const validateAadhar = (Aadhar) => {
   if (!Aadhar.trim()) return 'Please enter a Aadhar number';
-  if (!regex.Aadhar.test(Aadhar.trim())) return 'Please enter a valid AAdhar number';
+  if (!regex.Aadhar.test(Aadhar.trim())) return 'This Aadhar Number doesn’t exist';
   return '';
 };
 
@@ -78,13 +79,13 @@ export const validateAddress = (address) => {
 };
 
 export const validateEmail = (email) => {
-  if (!email.trim()) return 'Please enter an Email';
-  if (!regex.email.test(email.trim())) return 'Please enter a valid Email';
+  if (!email.trim()) return Lang_chg.enterEmailtxt[config.language];
+  if (!regex.email.test(email.trim())) return Lang_chg.validEmail[config.language];
   return '';
 };
 
 export const validatePassword = (password) => {
-  if (!password.trim()) return 'Please enter a Password';
+  if (!password.trim()) return Lang_chg.enterPasswordError[config.language];
   if (!regex.password.test(password.trim()))
     return 'Password must be at least 3 characters with no spaces';
   return '';

@@ -20,6 +20,7 @@ import ImagePicker from 'react-native-image-crop-picker';
 import { Colors } from '../Colorfont/Color';
 import {Marker} from 'react-native-maps';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Lang_chg } from '../Language/Language_provider';
 import {
   validateEmail,
   validatePassword,
@@ -59,19 +60,57 @@ const skillsdata  = [
 
 const cityStateData = {
   Mumbai: { state: 'Maharashtra', pincode: '400001' },
-  oli: { state: 'Delhi', pincode: '	110001' },
-  Bangalore: { state: 'Bengaluru', pincode: '560001' },
-  "Vijay nagar indore": { state: 'M.P', pincode: '452016' },
-  Palasiya: { state: 'M.P', pincode: '452010' },
+  Delhi: { state: 'Delhi', pincode: '110001' },
+  Bengaluru: { state: 'Karnataka', pincode: '560001' },
+  Hyderabad: { state: 'Telangana', pincode: '500001' },
+  Chennai: { state: 'Tamil Nadu', pincode: '600001' },
+  Kolkata: { state: 'West Bengal', pincode: '700001' },
+  Ahmedabad: { state: 'Gujarat', pincode: '380001' },
+  Pune: { state: 'Maharashtra', pincode: '411001' },
+  Jaipur: { state: 'Rajasthan', pincode: '302001' },
+  Lucknow: { state: 'Uttar Pradesh', pincode: '226001' },
+   Indore: { state: 'Madhya Pradesh', pincode: '452001' },
+  Dhar: { state: 'Madhya Pradesh', pincode: '454001' },
+  Ratlam: { state: 'Madhya Pradesh', pincode: '457001' },
+  Ujjain: { state: 'Madhya Pradesh', pincode: '456001' },
+  "Vijay Nagar": { pincode: "452010", city: "Indore", state: "Madhya Pradesh" },
+  "Palasia": { pincode: "452001", city: "Indore", state: "Madhya Pradesh" },
+  "Rajwada": { pincode: "452002", city: "Indore", state: "Madhya Pradesh" },
+  "Bhawarkua": { pincode: "452001", city: "Indore", state: "Madhya Pradesh" },
+  "Scheme No. 54": { pincode: "452010", city: "Indore", state: "Madhya Pradesh" },
+  "MR-10 Road": { pincode: "452010", city: "Indore", state: "Madhya Pradesh" },
+  "Sudama Nagar": { pincode: "452009", city: "Indore", state: "Madhya Pradesh" },
+  "Annapurna": { pincode: "452009", city: "Indore", state: "Madhya Pradesh" },
+  "LIG Colony": { pincode: "452008", city: "Indore", state: "Madhya Pradesh" },
+  "AB Road": { pincode: "452010", city: "Indore", state: "Madhya Pradesh" },
+  "Khajrana": { pincode: "452016", city: "Indore", state: "Madhya Pradesh" },
+  "Mhow": { pincode: "453441", city: "Indore", state: "Madhya Pradesh" },
 };
+
 
 const pincodeCountryData = {
   400001: 'India',
   110001: 'India',
   560001: 'India',
-  452016: 'M.P',
-  452010: 'M.P',
+  500001: 'India',
+  600001: 'India',
+  700001: 'India',
+  380001: 'India',
+  411001: 'India',
+  302001: 'India',
+  226001: 'India',
+   452001: 'India', // Indore
+  454001: 'India', // Dhar
+  457001: 'India', // Ratlam
+  456001: 'India', // Ujjain
+  452009:"India",
+  453441:"India",
+  452016:"India",
+  452010:"India",
+  452002:"India",
+  452008:"India"
 };
+
 
 const SignUp = ({ navigation,route }) => {
    const { latitude, longitude } = route.params || {};
