@@ -80,7 +80,7 @@ const [error, setError] = useState('');
                   { fontWeight: tab === 'Current' ? '700' : '300' },
                 ]}
               >
-                Vendor
+                Worker
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -100,7 +100,7 @@ const [error, setError] = useState('');
                   { fontWeight: tab === 'Current' ? '300' : '700' },
                 ]}
               >
-                Customer
+                Owner
               </Text>
             </TouchableOpacity>
           </View>

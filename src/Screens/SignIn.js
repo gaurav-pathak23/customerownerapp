@@ -24,14 +24,14 @@ const SignIn = ({ navigation }) => {
   useEffect(() => {
   const fetchData = async () => {
     try {
-      const vendorData = await AsyncStorage.getItem('vendorData');
-      const customerData = await AsyncStorage.getItem('customerData');
+      const workerdata = await AsyncStorage.getItem('workerdata');
+      const OwnerData = await AsyncStorage.getItem('OwnerData');
 
-      if (vendorData) {
-        console.log('Loaded Vendor Data:', JSON.parse(vendorData));
+      if (workerdata) {
+        console.log('Loaded worker Data:', JSON.parse(workerdata));
       }
-      if (customerData) {
-        console.log('Loaded Customer Data:', JSON.parse(customerData));
+      if (OwnerData) {
+        console.log('Loaded owner Data:', JSON.parse(OwnerData));
       }
     } catch (error) {
       console.log('Error fetching data:', error);
@@ -41,30 +41,7 @@ const SignIn = ({ navigation }) => {
   fetchData();
 }, []);
 
-//   const validateForm = () => {
-//   let newErrors = { email: '', password: '' };
-//  console.log(newErrors,"newErrors.............................. emil & password");
-//     const emailError = validateEmail(email);
-//     console.log(emailError,"....emailError...................");
-//     if (emailError) {
-//       newErrors.email = emailError;
-//       setErrors(newErrors);
-//       return;
-//     }
 
-//     // Step 2: Validate password only if email is valid
-//     const passwordError = validatePassword(password);
-//     if (passwordError) {
-//       newErrors.password = passwordError;
-//       setErrors(newErrors);
-//       return;
-//     }
-
-//     // Step 3: Both are valid
-//     setErrors({ email: '', password: '' });
-//     Alert.alert('Success', 'Form is valid!');
-//     navigation.navigate('Home');
-//   };
 
 
 const validateForm = async () => {
@@ -87,9 +64,10 @@ const validateForm = async () => {
 
   // Step 2: Check against stored user
   try {
-    const key = tab === 'Current' ? 'vendorData' : 'customerData';
+    const key = tab === 'Current' ? 'workerdata' : 'OwnerData';
     const storedData = await AsyncStorage.getItem(key);
-
+ console.log(storedData,"storedata!!!!");
+ 
     if (!storedData) {
       setErrors({ email: 'No account found. Please Sign Up.', password: '' });
       return;
@@ -152,7 +130,7 @@ const validateForm = async () => {
                   styles.vendortext,
                   { fontWeight: tab === 'Current' ? '700' : '300' },
                 ]} >
-                Vendor
+                Worker
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -172,7 +150,7 @@ const validateForm = async () => {
                   { fontWeight: tab === 'Current' ? '300' : '700' },
                 ]}
               >
-                Customer
+                Owner
               </Text>
             </TouchableOpacity>
           </View>

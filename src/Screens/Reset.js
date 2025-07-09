@@ -84,7 +84,7 @@ const Reset = ({ navigation }) => {
                 ]}
               >
                 {' '}
-                Vendor{' '}
+                Worker{' '}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -105,7 +105,7 @@ const Reset = ({ navigation }) => {
                 ]}
               >
                 {' '}
-                Customer
+              Owner
               </Text>
             </TouchableOpacity>
           </View>

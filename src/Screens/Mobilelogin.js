@@ -78,7 +78,7 @@ const Mobilelogin = ({ navigation }) => {
                   { fontWeight: tab === 'Current' ? '700' : '300' },
                 ]}
               >
-                Vendor
+                Worker
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -98,7 +98,7 @@ const Mobilelogin = ({ navigation }) => {
                   { fontWeight: tab === 'Current' ? '300' : '700' },
                 ]}
               >
-                Customer
+                Owner
               </Text>
             </TouchableOpacity>
           </View>
