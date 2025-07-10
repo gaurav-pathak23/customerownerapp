@@ -1,78 +1,6 @@
 
-// export const regex = {
-//   email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}(\.[0-9]{1,3}){3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-//   mobile: /^[0-9_]+$/,
-//   otp: /^[0-9_]+$/,
-//   amount: /^[0-9_.]+$/,
-//   password: /^\S{3,}$/, // no space, min 3 chars
-//   gender : /^(Male|Female|Other)$/i,
-//   business:/^[a-zA-Z0-9\s&.,'-]{2,}$/,
-//  city:/^[a-zA-Z\s]{2,}$/,
-//  pincode:/^[1-9][0-9]{5}$/,
-//  address: /^[a-zA-Z0-9\s,.'-]{5,}$/,
-//  name : /^[a-zA-Z\s]{2,}$/,
-
-// };
-
-// // ✅ Form Field Validators
-// export const validateName = (name) => {
-//   if (!name.trim()) return 'Please enter a Name';
-//   if (!regex.name.test(name.trim())) return 'Please enter a valid Name';
-//   return '';
-// };
-// export const validateGender = (gender) => {
-//   if (!gender.trim()) return 'Please enter an Gender';
-//   if (!regex.gender.test(gender.trim())) return 'Please enter  a Gender';
-//   return '';
-// };
-// export const validateBuisness = (business) => {
-//   if (!business.trim()) return 'Please enter an Buisness';
-//   if (!regex.business.test(business.trim())) return 'Please enter a Buisness';
-//   return '';
-// };
-// export const validateCity = (city) => {
-//   if (!city.trim()) return 'Please enter an City';
-//   if (!regex.city.test(city.trim())) return 'Please enter a City';
-//   return '';
-// };
-// export const validatePincode = (pincode) => {
-//   if (!pincode.trim()) return 'Please enter an Pincode';
-//   if (!regex.pincode.test(pincode.trim())) return 'Please enter a Pincode';
-//   return '';
-// };
-// export const validateAddress = (address) => {
-//   if (!address.trim()) return 'Please enter an Address';
-//   if (!regex.address.test(address.trim())) return 'Please enter a Address';
-//   return '';
-// };
-
-// export const validateEmail = (email) => {
-//   if (!email.trim()) return 'Please enter an Email';
-//   if (!regex.email.test(email.trim())) return 'Please enter a valid Email';
-//   return '';
-// };
-
-// export const validatePassword = (password) => {
-//   if (!password.trim()) return 'Please enter a Password';
-//   if (!regex.password.test(password.trim()))
-//     return 'Password must be at least 3 characters, no spaces';
-//   return '';
-// };
-// export const confirmPassword = (password) => {
-//   if (!password.trim()) return 'Please enter a password';
-//   if (!regex.password.test(password.trim()))
-//     return 'Password must be at least 3 characters, no spaces';
-//   return '';
-// };
-// export const Mobilenumber = (mobile) => {
-//   if (!mobile.trim()) return 'Please enter a mobile number';
-//   if (!regex.mobile.test(mobile.trim()))
-//     return 'Enter a valid mobile number';
-//   return '';
-// };
-
-
-
+import { Lang_chg } from "./Language/Language_provider";
+import { config } from "./Language/configProvider";
 export const regex = {
   image: /\.(jpg|jpeg|png)$/i,
   email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, // Simplified and correct email regex
@@ -86,6 +14,9 @@ export const regex = {
   pincode: /^[1-9][0-9]{5}$/, // Indian 6-digit pincode
   address: /^[a-zA-Z0-9\s,.'-]{5,}$/,
   name: /^[a-zA-Z\s]{2,}$/,
+  Aadhar:/^[2-9]{1}[0-9]{11}$/,
+  dob : /^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(19|20)\d{2}$/,
+
 };
 
 // ✅ Form Field Validators
@@ -106,6 +37,16 @@ export const validateName = (name) => {
   if (!regex.name.test(name.trim())) return 'Please enter a valid Name';
   return '';
 };
+export const validatedob = (dob) => {
+  if (!dob.trim()) return 'Please enter a Dob';
+  if (!regex.dob.test(dob.trim())) return 'Please enter a valid Dob';
+  return '';
+};
+export const validateAadhar = (Aadhar) => {
+  if (!Aadhar.trim()) return 'Please enter a Aadhar number';
+  if (!regex.Aadhar.test(Aadhar.trim())) return 'This Aadhar Number doesn’t exist';
+  return '';
+};
 
 export const validateGender = (gender) => {
   if (!gender.trim()) return 'Please enter a Gender';
@@ -114,8 +55,8 @@ export const validateGender = (gender) => {
 };
 
 export const validateBuisness = (business) => {
-  if (!business.trim()) return 'Please enter a Business name';
-  if (!regex.business.test(business.trim())) return 'Please enter a valid Business name';
+  if (!business.trim()) return 'Please enter a Skill name';
+  if (!regex.business.test(business.trim())) return 'Please enter a valid Skills name';
   return '';
 };
 
@@ -138,13 +79,13 @@ export const validateAddress = (address) => {
 };
 
 export const validateEmail = (email) => {
-  if (!email.trim()) return 'Please enter an Email';
-  if (!regex.email.test(email.trim())) return 'Please enter a valid Email';
+  if (!email.trim()) return Lang_chg.enterEmailtxt[config.language];
+  if (!regex.email.test(email.trim())) return Lang_chg.validEmail[config.language];
   return '';
 };
 
 export const validatePassword = (password) => {
-  if (!password.trim()) return 'Please enter a Password';
+  if (!password.trim()) return Lang_chg.enterPasswordError[config.language];
   if (!regex.password.test(password.trim()))
     return 'Password must be at least 3 characters with no spaces';
   return '';

@@ -2,19 +2,41 @@ import { View, Text ,StyleSheet ,Dimensions ,Image ,ImageBackground, TouchableOp
 import React ,{useState}from 'react'
 import { Colors, Font } from '../Colorfont/Color';
 import { Dropdown } from 'react-native-element-dropdown';
-
+import { Lang_chg } from '../Language/Language_provider';
+import { config } from '../Language/configProvider';
 const mobileW = Dimensions.get('window').width;
 const mobileH = Dimensions.get('window').height;
    const data2 = [
-  { label: 'Hindi', value: '1' },
-  { label: 'English', value: '2' },
-  { label: 'Dutch', value: '3' },
+  { label: 'English', value: '0' },  // index 0
+  { label: 'Hindi', value: '1' },    // index 1
 ];
 const Language =({navigation})=> {
- 
+ const [language, setlanguage] = useState('Select language*');
 const [isFocus, setIsFocus] = useState(false);
   const [value, setValue] = useState();
   console.log(value,"...................value");
+
+  //  language selection code 
+//   const setSelectedIndex1 = (item ,index) => {
+// console.log('-----------------',item);
+//     for(let i=0;i<=languages.length;i++){
+//       if(item.code=="en"){
+//         config.language = 0
+//         setlanguage('English') 
+//       } if(item.code=="hi"){
+//         config.language = 1
+//         setlanguage('हिंदी') 
+//       }
+//     }
+//     languages.forEach((elem) => {
+//       elem.toggle = false
+//       if (elem.id === item.id) {
+//         elem.toggle = true
+//         // setlanguage(elem.name)
+//         setlanguageId(elem.id)  } })
+
+//     setlanguages([...languages]);
+//   }; 
   
   return (
     <View>
@@ -26,11 +48,9 @@ const [isFocus, setIsFocus] = useState(false);
             <Image
               resizeMode="contain"
               style={styles.image}
-              source={require('../Icons/haathsath.png')}
-            />
-            <TouchableOpacity onPress={()=>navigation.navigate('SignIn')}>
+              source={require('../Icons/haathsath.png')}/>
              <Text style={styles.Language}>Choose Your Language</Text>
-             </TouchableOpacity>
+          
                    <View>
                       <Dropdown
                         style={[styles.dropdown, isFocus && { borderColor: Colors.whitetxt }]}
@@ -39,7 +59,7 @@ const [isFocus, setIsFocus] = useState(false);
                         inputSearchStyle={styles.inputSearchStyle}
                         placeholder="Select Language"
                         iconStyle={styles.iconStyle}
-                        placeholderTextColor={Colors.placeholdertxtcolor}
+                        placeholderTextColor={Colors.loremtxt}
                         data={data2}
                         search
                         Mode={"outlined"}
@@ -54,8 +74,15 @@ const [isFocus, setIsFocus] = useState(false);
                         onChange={item => {
                           setValue(item.value);
                           setIsFocus(false);
+                          config.language = Number(item.value);
                           navigation.navigate('SignIn')
                         }}
+                        renderRightIcon={() => (
+                                <Image
+                                  source={require('../Icons/dropppp.png')}
+                                  style={styles.customIcon}
+                                />
+                              )}
                         
                       />
                     </View>
@@ -109,5 +136,10 @@ background: {
      padding:mobileW*3/100,
      fontWeight:"500",
      marginTop:mobileW*3/100
-      }
+      },
+      customIcon:{
+   width:mobileW*2.2/100,
+   height:mobileW*2.2/100,
+   right:mobileW*4/100
+  },
 })

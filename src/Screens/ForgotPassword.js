@@ -23,14 +23,18 @@ const ForgotPassword = ({ navigation }) => {
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const vendorData = await AsyncStorage.getItem('vendorData');
-      const customerData = await AsyncStorage.getItem('customerData');
+      const workerdata = await AsyncStorage.getItem('workerdata');
+      console.log(workerdata,"forgot password screen !!");
+      
+      const OwnerData = await AsyncStorage.getItem('OwnerData');
+      console.log(OwnerData,"ownerdata  forgot password screen !!!");
+      
 
-      if (vendorData) {
-        console.log('Loaded Vendor Data:', JSON.parse(vendorData));
+      if (workerdata) {
+        console.log('Loaded worker Data:', JSON.parse(workerdata));
       }
-      if (customerData) {
-        console.log('Loaded Customer Data:', JSON.parse(customerData));
+      if (OwnerData) {
+        console.log('Loaded Owner Data:', JSON.parse(OwnerData));
       }
     } catch (error) {
       console.log('Error fetching data:', error);
@@ -52,7 +56,7 @@ const validateForm = async () => {
   }
 
   try {
-    const key = tab === 'Current' ? 'vendorData' : 'customerData';
+    const key = tab === 'Current' ? 'workerdata' : 'OwnerData';
     const storedData = await AsyncStorage.getItem(key);
 
     if (!storedData) {
@@ -102,7 +106,7 @@ const validateForm = async () => {
         style={styles.background}
         resizeMode="cover"
       >
-        <Text style={styles.signintext}>Sign In.....</Text>
+        <Text style={styles.signintext}>Sign In</Text>
         <Text style={styles.text}>Enter your details below & Login</Text>
         <View style={{ padding: (mobileWidth * 7.2) / 100 }}>
           <View style={styles.tabview}>
@@ -123,7 +127,7 @@ const validateForm = async () => {
                   { fontWeight: tab === 'Current' ? '700' : '300' },
                 ]}
               >
-                Vendor
+                Worker
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -143,7 +147,7 @@ const validateForm = async () => {
                   { fontWeight: tab === 'Current' ? '300' : '700' },
                 ]}
               >
-                Customer
+                Owner
               </Text>
             </TouchableOpacity>
           </View>
@@ -152,7 +156,7 @@ const validateForm = async () => {
           <Text style={styles.Emailtext}>Email Address</Text>
           <TextInput
             placeholder="Enter Email Address"
-            placeholderTextColor={Colors.placeholdertxtcolor}
+            placeholderTextColor={Colors.loremtxt}
             maxLength={40}
             value={email}
             onChangeText={text => {

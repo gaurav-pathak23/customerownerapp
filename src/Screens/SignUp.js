@@ -11,12 +11,16 @@ import {
   Dimensions,
   Image,
   Modal,
+  Platform
 } from 'react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import moment from 'moment';
 import { Dropdown } from 'react-native-element-dropdown';
 import ImagePicker from 'react-native-image-crop-picker';
 import { Colors } from '../Colorfont/Color';
 import {Marker} from 'react-native-maps';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Lang_chg } from '../Language/Language_provider';
 import {
   validateEmail,
   validatePassword,
@@ -26,7 +30,7 @@ import {
   validateGender,
   validatePincode,
   validateName,
-  Mobilenumber,validateImage
+  Mobilenumber,validateImage,validateAadhar,validatedob
 } from '../validators';
 
 const mobileWidth = Dimensions.get('window').width;
@@ -37,30 +41,76 @@ const genderOptions = [
 ];
 
 const businessOptions = [
-  { label: 'Urban Roots Café', value: 'Urban Roots Café' },
-  { label: 'Local Buzz Studio', value: 'Local Buzz Studio' },
-  { label: 'Nukkad Needs', value: 'Nukkad Needs' },
-  { label: 'TownSide Threads', value: 'TownSide Threads' },
-  { label: 'Bazaar Wale Bhaiya', value: 'Bazaar Wale Bhaiya' },
-  { label: 'Mohalla Mart', value: 'Mohalla Mart' },
-  { label: 'Ghar Ka Taste', value: 'Ghar Ka Taste' },
+    { label: 'Time Management', value: 'Time Management' },
+  { label: 'Customer Service', value: 'Customer Service' },
+  { label: 'Sales skills', value: 'Sales skills' },
+  { label: 'Inventory Management', value: 'Inventory Management' },
+  { label: 'Mobile App Usage	', value: 'Mobile App Usage	' },
+  { label: 'Payment Handling', value: 'Payment Handling' },
+
+];
+const skillsdata  = [
+  { label: 'Business Strategy	', value: 'Business Strategy' },
+  { label: 'Marketing', value: 'Marketing' },
+  { label: 'Data Analysis', value: 'Data Analysis' },
+  { label: 'Team Lead	', value: 'Team Lead' },
+  { label: 'Legal & Compliance', value: 'Legal & Compliance' },
+ 
 ];
 
 const cityStateData = {
-  Mumbai: { state: 'Maharashtra', pincode: '333333' },
-  oli: { state: 'Delhi', pincode: '222222' },
-  Bangalore: { state: 'Karnataka', pincode: '111111' },
-  Vijaynagarindore: { state: 'M.P', pincode: '452016' },
-  Palasiya: { state: 'M.P', pincode: '452010' },
+  Mumbai: { state: 'Maharashtra', pincode: '400001' },
+  Delhi: { state: 'Delhi', pincode: '110001' },
+  Bengaluru: { state: 'Karnataka', pincode: '560001' },
+  Hyderabad: { state: 'Telangana', pincode: '500001' },
+  Chennai: { state: 'Tamil Nadu', pincode: '600001' },
+  Kolkata: { state: 'West Bengal', pincode: '700001' },
+  Ahmedabad: { state: 'Gujarat', pincode: '380001' },
+  Pune: { state: 'Maharashtra', pincode: '411001' },
+  Jaipur: { state: 'Rajasthan', pincode: '302001' },
+  Lucknow: { state: 'Uttar Pradesh', pincode: '226001' },
+   Indore: { state: 'Madhya Pradesh', pincode: '452001' },
+  Dhar: { state: 'Madhya Pradesh', pincode: '454001' },
+  Ratlam: { state: 'Madhya Pradesh', pincode: '457001' },
+  Ujjain: { state: 'Madhya Pradesh', pincode: '456001' },
+  "Vijay Nagar": { pincode: "452010", city: "Indore", state: "Madhya Pradesh" },
+  "Palasia": { pincode: "452001", city: "Indore", state: "Madhya Pradesh" },
+  "Rajwada": { pincode: "452002", city: "Indore", state: "Madhya Pradesh" },
+  "Bhawarkua": { pincode: "452001", city: "Indore", state: "Madhya Pradesh" },
+  "Scheme No. 54": { pincode: "452010", city: "Indore", state: "Madhya Pradesh" },
+  "MR-10 Road": { pincode: "452010", city: "Indore", state: "Madhya Pradesh" },
+  "Sudama Nagar": { pincode: "452009", city: "Indore", state: "Madhya Pradesh" },
+  "Annapurna": { pincode: "452009", city: "Indore", state: "Madhya Pradesh" },
+  "LIG Colony": { pincode: "452008", city: "Indore", state: "Madhya Pradesh" },
+  "AB Road": { pincode: "452010", city: "Indore", state: "Madhya Pradesh" },
+  "Khajrana": { pincode: "452016", city: "Indore", state: "Madhya Pradesh" },
+  "Mhow": { pincode: "453441", city: "Indore", state: "Madhya Pradesh" },
 };
 
+
 const pincodeCountryData = {
-  333333: 'India',
-  222222: 'England',
-  111111: 'India',
-  452016: 'M.P',
-  452010: 'M.P',
+  400001: 'India',
+  110001: 'India',
+  560001: 'India',
+  500001: 'India',
+  600001: 'India',
+  700001: 'India',
+  380001: 'India',
+  411001: 'India',
+  302001: 'India',
+  226001: 'India',
+   452001: 'India', // Indore
+  454001: 'India', // Dhar
+  457001: 'India', // Ratlam
+  456001: 'India', // Ujjain
+  452009:"India",
+  453441:"India",
+  452016:"India",
+  452010:"India",
+  452002:"India",
+  452008:"India"
 };
+
 
 const SignUp = ({ navigation,route }) => {
    const { latitude, longitude } = route.params || {};
@@ -87,12 +137,13 @@ useEffect(() => {
   const [image, setimage] = useState();
   const [proofimage, setproofimage] = useState();
   const [modalVisible, setModalVisible] = useState(false);
-  const [proofmodal, setproofmodal] = useState(false);
+  // const [proofmodal, setproofmodal] = useState(false);
   const [inputHeight, setInputHeight] = useState((mobileWidth * 30) / 100);
   const [imagePath, setimagePath] = useState('');
   const [proofimagepath, setproofimagePath] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [Aadhar, setAadhar] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
   const [mobile, setMobile] = useState('');
@@ -102,6 +153,8 @@ useEffect(() => {
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [pincode, setPincode] = useState('');
+  console.log(pincode,".......pincode");
+  
   const [country, setCountry] = useState('');
   const [tab, settab] = useState('Current');
   const [errors, setErrors] = useState({
@@ -116,6 +169,8 @@ useEffect(() => {
     gender: '',
     pincode: '',
      image: '',
+     Aadhar:'',
+     dob:''
   });
 console.log(errors,"errors................");
 
@@ -221,9 +276,24 @@ console.log(errors,"errors................");
     if (emailError) return setErrors({ ...newErrors, email: emailError });
     const mobileError = Mobilenumber(mobile);
     if (mobileError) return setErrors({ ...newErrors, mobile: mobileError });
+      const genderError = validateGender(gender);
+    if (genderError) return setErrors({ ...newErrors, gender: genderError });
+
       const businessError = validateBuisness(business);
-    if (businessError)
+        if (businessError)
       return setErrors({ ...newErrors, business: businessError });
+
+      const dobError = validatedob(dob);
+      console.log(dobError,"......dobError");
+      
+        if (dobError)
+      return setErrors({ ...newErrors, dob: dobError });
+
+      const AadharError = validateAadhar(Aadhar);
+      console.log(AadharError,"AadharError........AadharError");
+      
+    if (AadharError)
+      return setErrors({ ...newErrors, Aadhar: AadharError });
     const passwordError = validatePassword(password);
     if (passwordError)
       return setErrors({ ...newErrors, password: passwordError });
@@ -234,19 +304,12 @@ console.log(errors,"errors................");
         confirmPassword: 'Passwords do not match',
       });
 
-   
-
-
-if (tab === 'old') {
-    const genderError = validateGender(gender);
-    if (genderError) return setErrors({ ...newErrors, gender: genderError });
-}
-
-    const addressError = validateAddress(address);
+   const addressError = validateAddress(address);
     if (addressError) return setErrors({ ...newErrors, address: addressError });
 
-     const pincodeError = validatePincode(pincode);
+    const pincodeError = validatePincode(pincode);
     if (pincodeError) return setErrors({ ...newErrors, pincode: pincodeError });
+
     const cityError = validateCity(city);
     if (cityError) return setErrors({ ...newErrors, city: cityError });
 
@@ -255,6 +318,7 @@ if (tab === 'old') {
    setErrors({});
 
   const userData = {
+    Aadhar,
     name,
     email,
     mobile,
@@ -266,19 +330,21 @@ if (tab === 'old') {
     country,
     pincode,
     password,
+    dob,
     // imagePath,
     // proofimagepath,
     latitude: lat,
     longitude: long,
+    
   };
 
   try {
     if (tab === 'Current') {
-      await AsyncStorage.setItem('vendorData', JSON.stringify(userData));
-      console.log('Vendor data saved!',userData);
+      await AsyncStorage.setItem('workerdata', JSON.stringify(userData));
+      console.log('workerdata saved!',userData);
     } else if (tab === 'old') {
-      await AsyncStorage.setItem('customerData', JSON.stringify(userData));
-      console.log('Customer data saved!',userData);
+      await AsyncStorage.setItem('OwnerData', JSON.stringify(userData));
+      console.log('OwnerData saved!',userData);
     }
 
     Alert.alert('Success', 'Registration complete!');
@@ -291,9 +357,26 @@ if (tab === 'old') {
   };
 
 
-
-   const fallbackLat = 22.7552;
+// it's a manualy provide.. lat long 
+const fallbackLat = 22.7552;
 const fallbackLong = 75.8968;
+
+
+
+const [date, setDate] = useState(new Date(2000, 0, 1)); // default DOB
+  console.log(date,"date.....date");
+  
+  const [show, setShow] = useState(false);
+  const [dob, setDob] = useState('');
+ console.log(dob,"dob...........");
+ 
+  const onChange = (event, selectedDate) => {
+    setShow(Platform.OS === 'ios'); // iOS keeps picker open
+    if (selectedDate) {
+      setDate(selectedDate);
+      setDob(moment(selectedDate).format('DD-MM-YYYY')); // or 'YYYY-MM-DD'
+    }
+  };
 
   return (
     <View style={{ flex: 1 }}>
@@ -369,7 +452,7 @@ const fallbackLong = 75.8968;
           </View>
         </Modal>
         {/* proof modal */}
-        <Modal
+        {/* <Modal
           animationType="slide"
           transparent={true}
           visible={proofmodal}
@@ -407,17 +490,7 @@ const fallbackLong = 75.8968;
                 </TouchableOpacity>
               </View>
               <TouchableOpacity
-                style={{
-                  width: (mobileWidth * 25) / 100,
-                  height: (mobileWidth * 10) / 100,
-                  backgroundColor: 'transparent',
-                  borderRadius: (mobileWidth * 2) / 100,
-                  justifyContent: 'center',
-                  alignSelf: 'center',
-                  marginTop: (mobileWidth * 4) / 100,
-                  borderColor: Colors.tabcolor,
-                  borderWidth: (mobileWidth * 0.2) / 100,
-                }}
+                style={styles.cancelbutton}
                 onPress={() => setproofmodal(!proofmodal)}
               >
                 <Text
@@ -434,7 +507,7 @@ const fallbackLong = 75.8968;
               </TouchableOpacity>
             </View>
           </View>
-        </Modal>
+        </Modal> */}
         <ScrollView
           contentContainerStyle={{ paddingBottom: 100 }}
           keyboardShouldPersistTaps="handled"
@@ -461,7 +534,7 @@ const fallbackLong = 75.8968;
                     { fontWeight: tab === 'Current' ? '700' : '300' },
                   ]}
                 >
-                  Vendor
+                  Worker
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
@@ -481,7 +554,7 @@ const fallbackLong = 75.8968;
                     { fontWeight: tab === 'Current' ? '300' : '700' },
                   ]}
                 >
-                  Customer
+                  Owner
                 </Text>
               </TouchableOpacity>
             </View>
@@ -515,7 +588,7 @@ const fallbackLong = 75.8968;
             <TextInput
               style={styles.inputContainerStyle}
               placeholder="   Enter Full Name"
-              placeholderTextColor={Colors.placeholdertxtcolor}
+              placeholderTextColor={Colors.loremtxt}
               maxLength={40}
               value={name}
               onChangeText={text => {
@@ -530,7 +603,7 @@ const fallbackLong = 75.8968;
             <TextInput
               style={styles.inputContainerStyle}
               placeholder="   Email"
-              placeholderTextColor={Colors.placeholdertxtcolor}
+              placeholderTextColor={Colors.loremtxt}
               value={email}
               onChangeText={text => {
                 setEmail(text);
@@ -545,7 +618,7 @@ const fallbackLong = 75.8968;
               style={styles.inputContainerStyle}
               placeholder="   Mobile"
               keyboardType="number-pad"
-              placeholderTextColor={Colors.placeholdertxtcolor}
+              placeholderTextColor={Colors.loremtxt}
               value={mobile}
               onChangeText={text => {
                 setMobile(text);
@@ -555,10 +628,11 @@ const fallbackLong = 75.8968;
             {errors.mobile ? (
               <Text style={styles.errorText}>{errors.mobile}</Text>
             ) : null}
-            {tab === 'old' ? (
-              <>
+            {/* {tab === 'old' ? (
+              <> */}
+              {/* comment by gaurav */}
                  <Text style={[styles.text,{right:mobileWidth*37/100}]}>Gender </Text>
-                <Dropdown
+                {/* <Dropdown
                   style={styles.inputContainerStyle}
                   data={genderOptions}
                    selectedTextStyle={{
@@ -576,22 +650,48 @@ const fallbackLong = 75.8968;
                     setGender(item.value);
                     setErrors(prev => ({ ...prev, gender: '' }));
                   }}
-                />
+                /> */}
+                <Dropdown
+      style={styles.inputContainerStyle}
+      data={genderOptions}
+      labelField="label"
+      valueField="value"
+      placeholder="   Select Gender"
+      placeholderStyle={{ color: Colors.loremtxt }}
+      placeholderTextColor={Colors.placeholdertxtcolor}
+      selectedTextStyle={styles.selectedTextStyle}
+      iconStyle={styles.iconStyle}
+      value={gender}
+      onChange={item => {
+        setGender(item.value);
+        setErrors(prev => ({ ...prev, gender: '' }));
+      }}
+      // Optional: use your own icon instead of default arrow
+      renderRightIcon={() => (
+        <Image
+          source={require('../Icons/dropppp.png')}
+          style={styles.customIcon}
+        />
+      )}
+    />
                 {errors.gender ? (
                   <Text style={styles.errorText}>{errors.gender}</Text>
                 ) : null}
-              </>
-            ) : null}
-            <Text style={[styles.text,{right:mobileWidth*32/100}]}>Buisness name </Text>
+              {/* </>
+            ) : null} */}
+            {/* comment by gaurav.... */}
+            <Text style={[styles.text,{right:mobileWidth*39/100}]}>Skills* </Text>
+             {tab === 'old' ? (
+              <View>
             <Dropdown
               style={styles.inputContainerStyle}
               data={businessOptions}
-              labelField="label"
+              labelField=" label"
               valueField="value"
-              placeholder="   Select Business"
-              placeholderStyle={{ color: Colors.placeholdertxtcolor }} 
+              placeholder="   Select Skills"
+              placeholderStyle={{ color: Colors.loremtxt }} 
               selectedTextStyle={{
-                color: Colors.placeholdertxtcolor,
+                color: Colors.whitetxt,
                 left: (mobileWidth * 3) / 100,
                 fontSize: (mobileWidth * 3.4) / 100,
               }}
@@ -601,12 +701,83 @@ const fallbackLong = 75.8968;
                 setBusiness(item.value);
                 setErrors(prev => ({ ...prev, business: '' }));
               }}
+              renderRightIcon={() => (
+        <Image
+          source={require('../Icons/dropppp.png')}
+          style={styles.customIcon}
+        />
+      )}
             />
             {errors.business ? (
               <Text style={styles.errorText}>{errors.business}</Text>
             ) : null}
-            <Text style={[styles.text,{right:mobileWidth*12/100}]}>ID Proof(Aadhar/PAN/Passport) Optoanal</Text>
-             <View style={[styles.inputContainerStyle,{flexDirection:"row",justifyContent:"space-between"}]}>
+           </View>
+           ) :
+           <View>
+            <Dropdown
+              style={styles.inputContainerStyle}
+              data={skillsdata}
+              labelField="label"
+              valueField="value"
+              placeholder="   Select Skills"
+              placeholderStyle={{ color: Colors.loremtxt }} 
+              selectedTextStyle={{
+                color: Colors.whitetxt,
+                left: (mobileWidth * 3) / 100,
+                fontSize: (mobileWidth * 3.4) / 100,
+              }}
+              placeholderTextColor={Colors.placeholdertxtcolor}
+              value={business}
+              onChange={item => {
+                setBusiness(item.value);
+                setErrors(prev => ({ ...prev, business: '' }));
+              }}
+              renderRightIcon={() => (
+        <Image
+          source={require('../Icons/dropppp.png')}
+          style={styles.customIcon}
+        />
+      )}
+            />
+             {errors.business ? (
+              <Text style={[styles.errorText,{right:mobileWidth*-2/100}]}>{errors.business}</Text>
+            ) : null}
+                </View>
+            }
+
+
+            <Text style={[styles.text,{right:mobileWidth*32/100}]}>Date of birth</Text>
+               <View style={[styles.inputContainerStyle,{flexDirection:"row",justifyContent:"space-between",alignItems:"center"}]}>
+{/* <TouchableOpacity style={{flexDirection:"row",justifyContent:"space-between",alignItems:"center"}} onPress={() => setShow(true)} > */}
+<Text
+  style={{
+    color: dob ? Colors.whitetxt : Colors.loremtxt,
+    textAlign: 'center',
+    marginLeft: mobileWidth * 2 / 100,
+  }}
+>
+  {dob || 'Select Date of Birth'}
+      
+        </Text>
+        <TouchableOpacity onPress={() => setShow(true)}>
+        <Image style={styles.calender} source={require('../Icons/CalendarBlank.png')}/>
+      </TouchableOpacity>
+       {show && (
+        <DateTimePicker
+          value={date}
+          mode="date"
+          display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+          onChange={onChange}
+          maximumDate={new Date()} // DOB should not be future date
+        />
+      )}
+             
+                      </View>
+                       {errors.dob ? (
+              <Text style={[styles.errorText,{right:mobileWidth*30/100}]}>{errors.dob}</Text>
+            ) : null}
+            <Text style={[styles.text,{right:mobileWidth*32/100}]}>Aadhar Number</Text>
+             {/* <View style={[styles.inputContainerStyle,{flexDirection:"row",justifyContent:"space-between"}]}>
              <View>
                <Image
                 style={styles.proofimage}
@@ -620,13 +791,30 @@ const fallbackLong = 75.8968;
              <TouchableOpacity onPress={() => setproofmodal(true)}>
             <Image style={styles.downerrow} source={require('../Icons/downarrow.png')}/>
           </TouchableOpacity>
-                      </View>
+                      </View> */}
+
+                        <TextInput
+              style={styles.inputContainerStyle}
+              placeholder="Aadhar Number"
+              placeholderTextColor={Colors.loremtxt}
+               keyboardType="numeric"
+              maxLength={12}
+              value={Aadhar}
+              onChangeText={text => {
+                setAadhar(text);
+                setErrors(prev => ({ ...prev, Aadhar: '' }));
+              }}
+            />
+            {errors.Aadhar ? (
+              <Text style={styles.errorText}>{errors.Aadhar}</Text>
+            ) : null}
+
             <Text style={[styles.text,{right:mobileWidth*36/100}]}>Password </Text>
             <TextInput
               style={styles.inputContainerStyle}
               placeholder="   Password"
-              placeholderTextColor={Colors.placeholdertxtcolor}
-              secureTextEntry
+              placeholderTextColor={Colors.loremtxt}
+              
               maxLength={20}
               value={password}
               onChangeText={text => {
@@ -641,8 +829,8 @@ const fallbackLong = 75.8968;
             <TextInput
               style={styles.inputContainerStyle}
               placeholder="   Confirm Password"
-              placeholderTextColor={Colors.placeholdertxtcolor}
-              secureTextEntry
+              placeholderTextColor={Colors.loremtxt}
+              
               maxLength={20}
               value={confirmPassword}
               onChangeText={text => {
@@ -659,7 +847,7 @@ const fallbackLong = 75.8968;
             <TextInput
               style={[styles.inputContainerStyle, { height: inputHeight }]}
               multiline
-              placeholderTextColor={Colors.placeholdertxtcolor}
+              placeholderTextColor={Colors.loremtxt}
               placeholder="   Address"
               value={address}
               onChangeText={text => {
@@ -689,7 +877,7 @@ const fallbackLong = 75.8968;
               <View>
               <TextInput
                 style={[styles.input, { right: (mobileWidth * 3) / 100 }]}
-                placeholderTextColor={Colors.placeholdertxtcolor}
+                placeholderTextColor={Colors.loremtxt}
                 placeholder="   Pincode"
                 value={pincode}
                 keyboardType="number-pad"
@@ -704,7 +892,7 @@ const fallbackLong = 75.8968;
 
               <TextInput
                 style={[styles.input, { left: (mobileWidth * 4) / 100 }]}
-                placeholderTextColor={Colors.placeholdertxtcolor}
+                placeholderTextColor={Colors.loremtxt}
                 placeholder="   City"
                 value={city}
                 onChangeText={handleCityChange}
@@ -730,7 +918,7 @@ const fallbackLong = 75.8968;
               
               <TextInput
                 style={[styles.input, { right: (mobileWidth * 3) / 100 }]}
-                placeholderTextColor={Colors.placeholdertxtcolor}
+                placeholderTextColor={Colors.loremtxt}
                 placeholder="   State"
                 value={state}
                 editable={false}
@@ -738,7 +926,7 @@ const fallbackLong = 75.8968;
 
               <TextInput
                 style={[styles.input, { right: (mobileWidth * -3) / 100 }]}
-                placeholderTextColor={Colors.placeholdertxtcolor}
+                placeholderTextColor={Colors.loremtxt}
                 placeholder="   Country"
                 value={country}
                 editable={false}
@@ -776,16 +964,7 @@ const fallbackLong = 75.8968;
   showsPointsOfInterest={true}
 >
   {/* Conditionally render marker */}
- {/* {lat !== 0 && long !== 0 && (
-  <Marker
-    coordinate={{
-      latitude: lat,
-      longitude: long,
-    }}
-    image={require('../Icons/Location.png')}
-    title="Code Tech Infosystem Pvt Ltd ."
-  />
-)} */}
+ 
 
 {lat && long && (
   <Marker
@@ -821,12 +1000,34 @@ const styles = StyleSheet.create({
     fontSize: mobileWidth*4/100,
     marginTop:mobileWidth*2/100
   },
+  dobBox: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 14,
+    borderRadius: 6,
+  },
+  customIcon:{
+   width:mobileWidth*2.2/100,
+   height:mobileWidth*2.2/100,
+   right:mobileWidth*4/100
+  },
   proofPlaceholderText:{
   color: Colors.placeholdertxtcolor,
   marginTop:mobileWidth*-4/100,
   left:mobileWidth*3/100,
 
   },
+  cancelbutton:{
+                  width: (mobileWidth * 25) / 100,
+                  height: (mobileWidth * 10) / 100,
+                  backgroundColor: 'transparent',
+                  borderRadius: (mobileWidth * 2) / 100,
+                  justifyContent: 'center',
+                  alignSelf: 'center',
+                  marginTop: (mobileWidth * 4) / 100,
+                  borderColor: Colors.tabcolor,
+                  borderWidth: (mobileWidth * 0.2) / 100,
+                },
   downerrow:{
   width:mobileWidth*3/100,
   height:mobileWidth*3/100,
@@ -867,6 +1068,12 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.tabcolor,
     justifyContent: 'center',
     marginTop: (mobileWidth * 4) / 100,
+  },
+  calender:{
+  width:mobileWidth*5/100,
+  height:mobileWidth*5/100,
+  tintColor:Colors.whitetxt,
+  right:mobileWidth*3/100
   },
   mobileemailtext: {
     color: Colors.whitetxt,
@@ -1026,6 +1233,7 @@ const styles = StyleSheet.create({
   selectedTextStyle: {
     color: Colors.whitetxt,
     fontSize: (mobileWidth * 3) / 100,
+    left:mobileWidth*2/100
   },
   dropdown: {
     borderColor: Colors.placeholdertxtcolor,

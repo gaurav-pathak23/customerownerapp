@@ -84,7 +84,7 @@ const Reset = ({ navigation }) => {
                 ]}
               >
                 {' '}
-                Vendor{' '}
+                Worker{' '}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -105,7 +105,7 @@ const Reset = ({ navigation }) => {
                 ]}
               >
                 {' '}
-                Customer
+              Owner
               </Text>
             </TouchableOpacity>
           </View>
@@ -114,7 +114,7 @@ const Reset = ({ navigation }) => {
           <Text style={styles.Emailtext}>Enter New Password</Text>
           <TextInput
             placeholder="Enter Password"
-            placeholderTextColor={Colors.placeholdertxtcolor}
+            placeholderTextColor={Colors.loremtxt}
             maxLength={40}
             value={password}
             onChangeText={text => {
