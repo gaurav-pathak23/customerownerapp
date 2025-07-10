@@ -67,23 +67,36 @@ const validateForm = async () => {
   // Step 2: Check against stored user
   try {
     const key = tab === 'Current' ? 'workerdata' : 'OwnerData';
-    const storedData = await AsyncStorage.getItem(key);
+    // const storedData = await AsyncStorage.getItem(key);
  console.log(storedData,"storedata!!!!");
- 
-    if (!storedData) {
-      setErrors({ email: 'No account found. Please Sign Up.', password: '' });
-      return;
-    }
 
-    const parsedData = JSON.parse(storedData);
+const storedData = await AsyncStorage.getItem(key);
+const parsedData = storedData ? JSON.parse(storedData) : null;
+
+if (!parsedData) {
+  setErrors({
+    email: Lang_chg.no_account_found[config.language],
+    password: '',
+  });
+  return;
+}
+
+
+ 
+    // if (!storedData) {
+    //   setErrors({ email:  Lang_chg.no_account_found[config.language], password: '' });
+    //   return;
+    // }
+
+    // const parsedData = JSON.parse(storedData);
 
     if (parsedData.email !== email) {
-      setErrors({ email: 'Email does not match.', password: '' });
+      setErrors({ email: Lang_chg.email_mismatch[config.language], password: '' });
       return;
     }
 
     if (parsedData.password !== password) {
-      setErrors({ email: '', password: 'Incorrect password.' });
+      setErrors({ email: '', password: Lang_chg.incorrect_password[config.language] });
       return;
     }
 

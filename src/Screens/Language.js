@@ -16,27 +16,7 @@ const [isFocus, setIsFocus] = useState(false);
   const [value, setValue] = useState();
   console.log(value,"...................value");
 
-  //  language selection code 
-//   const setSelectedIndex1 = (item ,index) => {
-// console.log('-----------------',item);
-//     for(let i=0;i<=languages.length;i++){
-//       if(item.code=="en"){
-//         config.language = 0
-//         setlanguage('English') 
-//       } if(item.code=="hi"){
-//         config.language = 1
-//         setlanguage('हिंदी') 
-//       }
-//     }
-//     languages.forEach((elem) => {
-//       elem.toggle = false
-//       if (elem.id === item.id) {
-//         elem.toggle = true
-//         // setlanguage(elem.name)
-//         setlanguageId(elem.id)  } })
 
-//     setlanguages([...languages]);
-//   }; 
   
   return (
     <View>

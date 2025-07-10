@@ -14,6 +14,8 @@ import { Colors } from '../Colorfont/Color';
 import PhoneInput from 'react-native-phone-number-input';
 import CountryPicker from 'react-native-country-picker-modal';
 import { Mobilenumber } from '../validators';
+import { Lang_chg } from '../Language/Language_provider';
+import { config } from '../Language/configProvider';
 const mobileWidth = Dimensions.get('window').width;
 
 const Mobilelogin = ({ navigation }) => {
@@ -37,7 +39,7 @@ const Mobilelogin = ({ navigation }) => {
 
    const handleVerify = () => {
       if (number.length !== 10) {
-        setError('Please enter a valid number');
+        setError(Lang_chg.Pleaseenteravalidnumber[config.language]);
         return;
       }
   
@@ -57,8 +59,8 @@ const Mobilelogin = ({ navigation }) => {
         style={styles.background}
         resizeMode="cover"
       >
-        <Text style={styles.signintext}>Sign In & Sign Up</Text>
-        <Text style={styles.text}>Enter your details below </Text>
+        <Text style={styles.signintext}>{Lang_chg.SignInSignUp[config.language]}</Text>
+        <Text style={styles.text}>{Lang_chg.enterDetailsBelow[config.language]}</Text>
         <View style={{ padding: (mobileWidth * 7.2) / 100 }}>
           <View style={styles.tabview}>
             <TouchableOpacity
@@ -78,7 +80,7 @@ const Mobilelogin = ({ navigation }) => {
                   { fontWeight: tab === 'Current' ? '700' : '300' },
                 ]}
               >
-                Worker
+               {Lang_chg.Workertxt[config.language]}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -98,13 +100,13 @@ const Mobilelogin = ({ navigation }) => {
                   { fontWeight: tab === 'Current' ? '300' : '700' },
                 ]}
               >
-                Owner
+                 {Lang_chg.Ownertxt[config.language]}
               </Text>
             </TouchableOpacity>
           </View>
           <View style={styles.bottomline}></View>
 
-          <Text style={styles.Emailtext}>Mobile Number</Text>
+          <Text style={styles.Emailtext}>{Lang_chg.Mobilenumber[config.language]}</Text>
 
            <View style={styles.inputContainer}>
       {/* Country Picker */}
@@ -139,12 +141,11 @@ const Mobilelogin = ({ navigation }) => {
            {error ? <Text style={styles.errorText}>{error}</Text> : null}
            
           <Text style={styles.otptext}>
-            An OTP will be sent on given phone number for verification. Standard
-            message and data rates apply.
+            {Lang_chg.AnOTPwillbe[config.language]}
           </Text>
                 
           <TouchableOpacity onPress={()=>handleVerify()} activeOpacity={0.8} style={styles.emailloginbutton}>
-            <Text style={styles.mobileemailtext}>Sign In / Sign Up</Text>
+            <Text style={styles.mobileemailtext}>{Lang_chg.SignInSignUp[config.language]}</Text>
           </TouchableOpacity>
         </View>
       </ImageBackground>

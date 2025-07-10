@@ -25,7 +25,25 @@ EnterPasswordtxt = ['Enter Password', 'पासवर्ड दर्ज कर
   validEmail= ['Please enter a valid Email', 'कृपया मान्य ईमेल दर्ज करें'];
   wrongPassword= ['Incorrect password.', 'गलत पासवर्ड।'];
   emailMismatch= ['Email does not match.', 'ईमेल मेल नहीं खाता।'];
-  accountNotFound=['No account found. Please Sign Up.', 'कोई खाता नहीं मिला। कृपया साइन अप करें।'];
+  accountNotFound=['No account found Please Sign Up', 'कोई खाता नहीं मिला। कृपया साइन अप करें।'];
+  no_account_found = ['No account found  Please Sign Up.', 'कोई खाता नहीं मिला। कृपया साइन अप करें।'];
+email_mismatch = ['Email does not match.', 'ईमेल मेल नहीं खाता।'];
+incorrect_password = ['Incorrect password.', 'गलत पासवर्ड।'];
+// forgot password screen
+back_to_login = ['Back to login', 'लॉगिन पर वापस जाएं'];
+Send_ =['Send',"भेजना"]
+SomethingwentwrongPleasetryagain =['Something went wrong. Please try again.',"कुछ गड़बड़ हुई है। कृपया दोबारा प्रयास करें।"]
+//  verifypassword screen
+EnterVarificationCode =['Enter Varification Code','सत्यापन कोड दर्ज करें'];
+Ifyoudidntcode =['If you didn\'t receive a code','यदि आपको कोड प्राप्त नहीं हुआ है']
+Resend =['Resend','पुन: भेजें']
+enter_valid_otp = ['Please enter a valid 4-digit OTP', 'कृपया एक मान्य 4-अंकीय ओटीपी दर्ज करें'];
+// mobile login screen
+Mobilenumber= ['Mobile Number','मोबाइल नंबर']
+SignInSignUp= ['Sign In & Sign Up','प्रवेश या साइन अप']
+Pleaseenteravalidnumber= ['Please enter a valid number','कृपया सही अंक दर्ज करें']
+
+AnOTPwillbe = ['An OTP will be sent on given phone number for verification. Standardmessage and data rates apply.','सत्यापन के लिए दिए गए फ़ोन नंबर पर एक ओटीपी भेजा जाएगा। मानकसंदेश और डेटा दरें लागू होंगी।']
   getText(key) {
     if (this[key]) {
       return this[key][config.language]; // 0 = English, 1 = Hindi

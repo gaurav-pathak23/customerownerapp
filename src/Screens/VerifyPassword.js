@@ -13,8 +13,8 @@ import {
 import React, { useState ,useRef } from 'react';
 import { Colors } from '../Colorfont/Color';
 import OTPTextInput from 'react-native-otp-textinput';
-
-
+import { Lang_chg } from '../Language/Language_provider';
+import { config } from '../Language/configProvider';
 const mobileWidth = Dimensions.get('window').width;
 
 
@@ -30,7 +30,7 @@ const [error, setError] = useState('');
 
   const handleVerify = () => {
     if (otp.length !== 4) {
-      setError('Please enter a valid 4-digit OTP');
+      setError (Lang_chg.enter_valid_otp[config.language]);
       return;
     }
 
@@ -59,8 +59,8 @@ const [error, setError] = useState('');
         style={styles.background}
         resizeMode="cover"
       >
-        <Text style={styles.signintext}>Sign In</Text>
-        <Text style={styles.text}>Enter your details below & Login</Text>
+        <Text style={styles.signintext}>{Lang_chg.signin[config.language]}</Text>
+        <Text style={styles.text}>{Lang_chg.enterDetailsBelow[config.language]}</Text>
         <View style={{ padding: (mobileWidth * 7.2) / 100 }}>
           <View style={styles.tabview}>
             <TouchableOpacity
@@ -80,7 +80,7 @@ const [error, setError] = useState('');
                   { fontWeight: tab === 'Current' ? '700' : '300' },
                 ]}
               >
-                Worker
+                {Lang_chg.Workertxt[config.language]}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -100,13 +100,13 @@ const [error, setError] = useState('');
                   { fontWeight: tab === 'Current' ? '300' : '700' },
                 ]}
               >
-                Owner
+                 {Lang_chg.Ownertxt[config.language]}
               </Text>
             </TouchableOpacity>
           </View>
           <View style={styles.bottomline}></View>
 
-          <Text style={styles.Emailtext}>Enter Varification Code</Text>
+          <Text style={styles.Emailtext}> {Lang_chg.EnterVarificationCode[config.language]}</Text>
           <OTPTextInput
         ref={otpInputRef}
         inputCount={4}
@@ -126,12 +126,12 @@ const [error, setError] = useState('');
             style={styles.emailloginbutton}
             onPress={()=>handleVerify()}
           >
-            <Text style={styles.mobileemailtext}>Send</Text>
+            <Text style={styles.mobileemailtext}>{Lang_chg.Send_[config.language]}</Text>
           </TouchableOpacity>
                        <TouchableOpacity style={{marginTop:mobileWidth*5/100 ,flexDirection:"row",justifyContent:"center"}}>
-                        <Text style={styles.mobileemailtext}>If you didn't receive a code</Text>
+                        <Text style={styles.mobileemailtext}>{Lang_chg.Ifyoudidntcode[config.language]}</Text>
                         <TouchableOpacity activeOpacity={0.8} onPress={()=>handleResend()}>
-                        <Text style={styles.resendtext}>Resend</Text>
+                        <Text style={styles.resendtext}>{Lang_chg.Resend[config.language]}</Text>
                         </TouchableOpacity>
                         </TouchableOpacity>
           <TouchableOpacity
@@ -139,7 +139,7 @@ const [error, setError] = useState('');
             activeOpacity={0.8}
             style={styles.mobileloginbutton}
           >
-            <Text style={styles.mobileemailtext}>Continue with Mobile</Text>
+            <Text style={styles.mobileemailtext}>{Lang_chg.continueMobiletxt[config.language]}</Text>
           </TouchableOpacity>
 
           <View style={styles.socialloginview}>
@@ -169,9 +169,9 @@ const [error, setError] = useState('');
               marginTop: (mobileWidth * 6) / 100,
             }}
           >
-            <Text style={styles.text}> if you do not have account? </Text>
+            <Text style={styles.text}>{Lang_chg.dontHaveAccount[config.language]}</Text>
              <TouchableOpacity  onPress={()=>navigation.navigate('SignUp')}>
-            <Text style={styles.signuptext}>Sign Up</Text>
+            <Text style={styles.signuptext}>{Lang_chg.signup[config.language]}</Text>
             </TouchableOpacity>
           </View>
         </View>

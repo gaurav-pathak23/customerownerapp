@@ -16,6 +16,8 @@ import {
   validatePassword,
   confirmPassword,
 } from '../validators';
+import { Lang_chg } from '../Language/Language_provider';
+import { config } from '../Language/configProvider';
 const mobileWidth = Dimensions.get('window').width;
 
 const Reset = ({ navigation }) => {
