@@ -15,7 +15,10 @@ export const Colors = {
     statictext:"#212121",
     subtxtcolor:"#757575",
     cardbackgroungcolor:"#DEF6EF",
-    loremtxt:"#838B8E"
+    loremtxt:"#838B8E",
+    border :"#A7AAAB",
+    selectInnerText :"#0A0A0B",
+    txtgray :"#4D4D4D"
     //  ==================== Shubham ======================= 
 
 
