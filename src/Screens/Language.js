@@ -1,4 +1,4 @@
-import { View, Text ,StyleSheet ,Dimensions ,Image ,ImageBackground, TouchableOpacity} from 'react-native'
+import { View, Text ,StyleSheet ,Dimensions ,Image ,ImageBackground, TouchableOpacity ,StatusBar} from 'react-native'
 import React ,{useState}from 'react'
 import { Colors, Font } from '../Colorfont/Color';
 import { Dropdown } from 'react-native-element-dropdown';
@@ -20,6 +20,8 @@ const [isFocus, setIsFocus] = useState(false);
   
   return (
     <View>
+              <StatusBar barStyle="light-content" hidden={false} backgroundColor={Colors.statusbar} />
+      
           <ImageBackground
             source={require('../Icons/splashscreen.png')}
             style={styles.background}
@@ -120,6 +122,6 @@ background: {
       customIcon:{
    width:mobileW*2.2/100,
    height:mobileW*2.2/100,
-   right:mobileW*4/100
+   right:mobileW*1/100
   },
 })

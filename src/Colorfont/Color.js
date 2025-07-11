@@ -18,7 +18,8 @@ export const Colors = {
     loremtxt:"#838B8E",
     border :"#A7AAAB",
     selectInnerText :"#0A0A0B",
-    txtgray :"#4D4D4D"
+    txtgray :"#4D4D4D",
+    statusbar:"#172C32"
     //  ==================== Shubham ======================= 
 
 

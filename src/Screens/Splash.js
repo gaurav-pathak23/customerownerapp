@@ -141,11 +141,11 @@ import {
   Image,
   PermissionsAndroid,
   Platform,
-  Alert,
+  Alert,StatusBar
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Geolocation from '@react-native-community/geolocation';
-
+import { Colors } from '../Colorfont/Color'
 const mobileWidth = Dimensions.get('window').width;
 
 const Splash = ({ navigation }) => {
@@ -204,7 +204,8 @@ const Splash = ({ navigation }) => {
 
           if (workerdata || OwnerData) {
             // Already signed in → Go to Home
-            navigation.replace('Home');
+            navigation.replace('Language');
+            // navigation.replace('SignIn');
           } else {
             // First time → Go to Language screen
             navigation.replace('Language', {
@@ -235,6 +236,8 @@ const Splash = ({ navigation }) => {
 
   return (
     <View>
+     
+        <StatusBar barStyle="light-content" hidden={false} backgroundColor={Colors.statusbar} />
       <ImageBackground
         source={require('../Icons/splashscreen.png')}
         style={styles.background}

@@ -7,7 +7,7 @@ import {
   Dimensions,
   TouchableOpacity,
   TextInput,
-  Alert,
+  Alert,StatusBar
 } from 'react-native';
 import React, { useState, useRef } from 'react';
 import { Colors } from '../Colorfont/Color';
@@ -54,6 +54,8 @@ const Mobilelogin = ({ navigation }) => {
 
   return (
     <View>
+    <StatusBar barStyle="light-content" hidden={false} backgroundColor={Colors.themcolortxt} />
+      
       <ImageBackground
         source={require('../Icons/splashscreen.png')}
         style={styles.background}
@@ -130,7 +132,7 @@ const Mobilelogin = ({ navigation }) => {
       {/* Mobile Input */}
       <TextInput
         style={styles.textInput}
-        placeholder="Mobile Number"
+        placeholder= {Lang_chg.Mobilenumber[config.language]}
         placeholderTextColor={Colors.loremtxt}
         keyboardType="number-pad"
         maxLength={10}
@@ -259,7 +261,6 @@ const styles = StyleSheet.create({
     width: (mobileWidth * 88) / 100,
     height: (mobileWidth * 11) / 100,
     borderRadius: (mobileWidth * 3) / 100,
-    borderWidth: (mobileWidth * 0) / 100,
   },
 
   inputError: {
@@ -310,7 +311,7 @@ const styles = StyleSheet.create({
     width: mobileWidth*0.2/100,
     height: '100%',
     backgroundColor:Colors.placeholdertxtcolor,
-    marginHorizontal: 10,
+    marginHorizontal: mobileWidth*2/100,
   },
   textInput: {
     flex: 1,

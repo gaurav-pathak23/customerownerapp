@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
   TextInput,
   Alert,
+  ScrollView,
+  StatusBar
 } from 'react-native';
 import React, { useState ,useEffect} from 'react';
 import { Colors } from '../Colorfont/Color';
@@ -96,7 +98,7 @@ if (!parsedData) {
     }
 
     if (parsedData.password !== password) {
-      setErrors({ email: '', password: Lang_chg.incorrect_password[config.language] });
+      setErrors({ email: '', password: Lang_chg.incorrect_password_[config.language] });
       return;
     }
 
@@ -117,12 +119,14 @@ if (!parsedData) {
 
   return (
     <View>
+              <StatusBar barStyle="light-content" hidden={false} backgroundColor={Colors.themcolortxt} />
+      
       <ImageBackground
         source={require('../Icons/splashscreen.png')}
         style={styles.background}
         resizeMode="cover"
       >
-        
+        <ScrollView>
 <Text style={styles.signintext}>{Lang_chg.signin[config.language]}</Text>
       
         
@@ -252,7 +256,12 @@ if (!parsedData) {
             activeOpacity={0.8}
             onPress={() => navigation.navigate('ForgotPassword')}
           >
-            <Text style={styles.forgotpasswordtext}>{Lang_chg.forgotPassword[config.language]}</Text>
+            <Text
+  style={
+    styles.forgotpasswordtext}>
+  {Lang_chg.forgotPassword[config.language]}
+</Text>
+            {/* <Text style={styles.forgotpasswordtext}>{Lang_chg.forgotPassword[config.language]}</Text> */}
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -304,6 +313,7 @@ if (!parsedData) {
             </TouchableOpacity>
           </View>
         </View>
+        </ScrollView>
       </ImageBackground>
     </View>
   );
@@ -402,7 +412,6 @@ const styles = StyleSheet.create({
   inputContainerStyle: {
     color: Colors.whitetxt,
     borderColor: Colors.placeholdertxtcolor,
-    // backgroundColor:'#FAFAFA',
     width: (mobileWidth * 88) / 100,
     height: (mobileWidth * 11) / 100,
     borderRadius: (mobileWidth * 3) / 100,
@@ -417,14 +426,13 @@ const styles = StyleSheet.create({
     height: (mobileWidth * 11) / 100,
     borderRadius: (mobileWidth * 3) / 100,
     borderWidth: (mobileWidth * 0) / 100,
-    // backgroundColor: Colors.bgColor, // adjust if needed
   },
   forgotpasswordtext: {
     color: Colors.whitetxt,
     textDecorationLine: 'underline',
     fontSize: (mobileWidth * 3.5) / 100,
-    left: (mobileWidth * 58) / 100,
      marginTop: (mobileWidth * 5) / 100,
+     textAlign:"right"
   },
   signuptext: {
     color: Colors.whitetxt,

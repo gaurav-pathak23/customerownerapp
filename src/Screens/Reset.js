@@ -7,7 +7,7 @@ import {
   Dimensions,
   TouchableOpacity,
   TextInput,
-  Alert,
+  Alert,StatusBar
 } from 'react-native';
 import React, { useState } from 'react';
 import { Colors } from '../Colorfont/Color';
@@ -41,13 +41,13 @@ const Reset = ({ navigation }) => {
       return;
     }
     if (!confirmPassword.trim()) {
-      newErrors.confirmPassword = 'Please confirm your password';
+      newErrors.confirmPassword =Lang_chg.Pleaseconfirmyourpassword[config.language];
       setErrors(newErrors);
       return;
     }
 
     if (password.trim() !== confirmPassword.trim()) {
-      newErrors.confirmPassword = 'Passwords do not match';
+      newErrors.confirmPassword = Lang_chg.Passwordsdonotmatch__[config.language];
       setErrors(newErrors);
       return;
     }
@@ -59,13 +59,15 @@ const Reset = ({ navigation }) => {
 
   return (
     <View>
+              <StatusBar barStyle="light-content" hidden={false} backgroundColor={Colors.statusbar} />
+      
       <ImageBackground
         source={require('../Icons/splashscreen.png')}
         style={styles.background}
         resizeMode="cover"
       >
-        <Text style={styles.signintext}>Sign In</Text>
-        <Text style={styles.text}>Enter your details below & Login</Text>
+        <Text style={styles.signintext}>{Lang_chg.signin[config.language]}</Text>
+        <Text style={styles.text}>{Lang_chg.enterDetailsBelow[config.language]}</Text>
         <View style={{ padding: (mobileWidth * 7.2) / 100 }}>
           <View style={styles.tabview}>
             <TouchableOpacity
@@ -86,7 +88,7 @@ const Reset = ({ navigation }) => {
                 ]}
               >
                 {' '}
-                Worker{' '}
+                {Lang_chg.Workertxt[config.language]}{' '}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -107,15 +109,15 @@ const Reset = ({ navigation }) => {
                 ]}
               >
                 {' '}
-              Owner
+              {Lang_chg.Ownertxt[config.language]}
               </Text>
             </TouchableOpacity>
           </View>
           <View style={styles.bottomline}></View>
 
-          <Text style={styles.Emailtext}>Enter New Password</Text>
+          <Text style={styles.Emailtext}>{Lang_chg.enterpswrd[config.language]}</Text>
           <TextInput
-            placeholder="Enter Password"
+            placeholder={Lang_chg.enterpswrd[config.language]}
             placeholderTextColor={Colors.loremtxt}
             maxLength={40}
             value={password}
@@ -138,11 +140,11 @@ const Reset = ({ navigation }) => {
           ) : null}
 
           {/* 🔐 Confirm Password */}
-          <Text style={styles.Emailtext}>Confirm Password</Text>
+          <Text style={styles.Emailtext}>{Lang_chg.Cnfrmpasrd[config.language]}</Text>
           <View style={styles.inputWrapper}>
             <TextInput
-              placeholder="Enter Confirm Password"
-              placeholderTextColor={Colors.placeholdertxtcolor}
+              placeholder={Lang_chg.Cnfrmpasrd[config.language]}
+              placeholderTextColor={Colors.loremtxt}
               maxLength={40}
               secureTextEntry={secureText}
               value={confirmPassword}
@@ -189,7 +191,7 @@ const Reset = ({ navigation }) => {
             style={styles.emailloginbutton}
             onPress={validateForm}
           >
-            <Text style={styles.mobileemailtext}>Reset Password</Text>
+            <Text style={styles.mobileemailtext}>{Lang_chg.ResetPassword[config.language]}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -197,7 +199,7 @@ const Reset = ({ navigation }) => {
             activeOpacity={0.8}
             style={styles.mobileloginbutton}
           >
-            <Text style={styles.mobileemailtext}>Continue with Mobile</Text>
+            <Text style={styles.mobileemailtext}>{Lang_chg.continueMobiletxt[config.language]}</Text>
           </TouchableOpacity>
 
           <View style={styles.socialloginview}>
@@ -227,9 +229,9 @@ const Reset = ({ navigation }) => {
               marginTop: (mobileWidth * 6) / 100,
             }}
           >
-            <Text style={styles.text}> if you do not have account? </Text>
+            <Text style={styles.text}> {Lang_chg.dontHaveAccount[config.language]}</Text>
             <TouchableOpacity activeOpacity={0.8}  onPress={()=>navigation.navigate('SignUp')}>
-            <Text style={styles.signuptext}>Sign Up</Text>
+            <Text style={styles.signuptext}>{Lang_chg.signup[config.language]}</Text>
             </TouchableOpacity>
           </View>
         </View>

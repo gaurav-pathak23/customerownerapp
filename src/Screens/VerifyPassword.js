@@ -8,7 +8,7 @@ import {
   Dimensions,
   TouchableOpacity,
   TextInput,
-  Alert,
+  Alert,StatusBar
 } from 'react-native';
 import React, { useState ,useRef } from 'react';
 import { Colors } from '../Colorfont/Color';
@@ -53,6 +53,8 @@ const [error, setError] = useState('');
 
   return (
     <View>
+              <StatusBar barStyle="light-content" hidden={false} backgroundColor={Colors.statusbar} />
+      
       <ImageBackground
         source={require('../Icons/splashscreen.png')}
         // source={require('../Icons/splashscreen.png')}
@@ -200,6 +202,7 @@ const styles = StyleSheet.create({
     borderColor: '#EFF2F1',
     color: '#121A23',
     fontSize: 20,
+    marginTop:mobileWidth*4/100
   },
   verifyotp_text: {
     fontSize: mobileWidth * 4 / 100,
