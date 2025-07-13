@@ -18,6 +18,8 @@ EnterPasswordtxt = ['Enter Password', 'पासवर्ड दर्ज कर
   dontHaveAccount = ['If you do not have account?', 'अगर आपका खाता नहीं है?'];
   signup = ['Sign Up', 'साइन अप करें'];
   signin = ['Sign In', 'साइन इन करें'];
+  Successful = ['Successful', 'सफल'];
+  Enterednumber = ['Entered  number', 'दर्ज किया गया नंबर'];
   enterDetailsBelow = ['Enter your details below & Login', 'अपना विवरण नीचे दर्ज करें और लॉगिन करें'];
   enterPasswordError= ['Please enter a Password', 'कृपया पासवर्ड दर्ज करें'];
   validPasswordError= ['Password must be at least 3 characters with no spaces', 'पासवर्ड कम से कम 3 अक्षरों का होना चाहिए'];
@@ -32,6 +34,7 @@ incorrect_password = ['Incorrect password.', 'गलत पासवर्ड।
 incorrect_password_ = ['Incorrect password.', 'पासवर्ड मेल नहीं खाता'];
 // forgot password screen
 back_to_login = ['Back to login', 'लॉगिन पर वापस जाएं'];
+Passwordchangedsuccessfully =['Password changed successfully!',"पासवर्ड सफलतापूर्वक बदला गया!"]
 Send_ =['Send',"भेजना"]
 SomethingwentwrongPleasetryagain =['Something went wrong. Please try again.',"कुछ गड़बड़ हुई है। कृपया दोबारा प्रयास करें।"]
 //  verifypassword screen
@@ -48,6 +51,7 @@ enterpswrd=['Enter New Password','नया पासवर्ड दर्ज �
 Cnfrmpasrd=['confirm Password','पासवर्ड की पुष्टि कीजिये']
 ResetPassword=['Reset Password','पासवर्ड बदलें']
 Entervcode=['Enter verification code','सत्यापन कोड दर्ज करें']
+Registration =['Registration complete!','पंजीकरण पूरा!']
 sendcode=['We have send you a 4 digit code on','हमने आपको 4 अंकों का कोड भेजा है']
 Passwordsdonotmatch__=['Passwords do not match','पासवर्ड मेल नहीं खाते']
 Pleaseconfirmyourpassword=['Please confirm your password','कृपया अपने पासवर्ड की पुष्टि करें']
@@ -111,7 +115,9 @@ error_validGender = ['Please enter a valid Gender', 'कृपया मान�
 error_enterSkill = ['Please enter a Skill name', 'कृपया कौशल नाम दर्ज करें'];
 error_validSkill = ['Please enter a valid Skills name', 'कृपया मान्य कौशल नाम दर्ज करें'];
 error_enterCity = ['Please enter a City', 'कृपया शहर दर्ज करें'];
+// ..........................
 error_validCity = ['Please enter a valid City', 'कृपया मान्य शहर दर्ज करें'];
+// .................................?
 error_enterPincode = ['Please enter a Pincode', 'कृपया पिनकोड दर्ज करें'];
 error_validPincode = ['Please enter a valid 6-digit Pincode', 'कृपया मान्य 6-अंकीय पिनकोड दर्ज करें'];
 error_enterAddress = ['Please enter an Address', 'कृपया पता दर्ज करें'];

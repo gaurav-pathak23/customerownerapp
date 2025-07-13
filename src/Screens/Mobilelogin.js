@@ -44,7 +44,7 @@ const Mobilelogin = ({ navigation }) => {
       }
   
       setError('');
-      Alert.alert('Success', `Entered  number: ${number}`);
+      Alert.alert(`${Lang_chg.Enterednumber[config.language]}: ${number}`);
       // Proceed to next screen or API verification
       navigation.navigate('Verificationcode', {
   mobileNumber: number,

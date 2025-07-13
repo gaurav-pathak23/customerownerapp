@@ -106,12 +106,12 @@ if (!parsedData) {
     setErrors({ email: '', password: '' });
 
     await AsyncStorage.setItem('loggedInUser', JSON.stringify(parsedData));
-    Alert.alert('Success', ' Successful');
+    Alert.alert(Lang_chg.Successful[config.language]);
     navigation.navigate('Home');
 
   } catch (error) {
     console.log('Validation error:', error);
-    Alert.alert('Error', 'An error occurred during login');
+   
   }
 };
 

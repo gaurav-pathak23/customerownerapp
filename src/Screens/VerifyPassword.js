@@ -35,7 +35,7 @@ const [error, setError] = useState('');
     }
 
     setError('');
-    Alert.alert('Success', `Entered OTP: ${otp}`);
+     Alert.alert(`${Lang_chg.Entervcode[config.language]}: ${otp}`);
     // Proceed to next screen or API verification
     navigation.navigate('Reset')
   };

@@ -53,7 +53,7 @@ const Reset = ({ navigation }) => {
     }
 
     setErrors({ password: '', confirmPassword: '' });
-    Alert.alert('Success', 'Password changed successfully!');
+    Alert.alert(Lang_chg.Passwordchangedsuccessfully[config.language]);
     navigation.navigate('Home');
   };
 
