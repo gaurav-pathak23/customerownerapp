@@ -176,7 +176,7 @@ const SignUp = ({ navigation, route }) => {
 
   const handleImagePick = (
     source = 'camera',
-    cropping = true,
+    cropping = false,
     mediaType = 'photo',
   ) => {
     const options = {
@@ -758,31 +758,28 @@ const SignUp = ({ navigation, route }) => {
 
               <View>
                 <Text style={[styles.text]}>{Lang_chg.Skills[config.language]} </Text>
-                <Dropdown
-                  style={styles.inputContainerStyle}
-                  data={businessOptions}
-                  labelField=" label"
-                  valueField="value"
-                  placeholder={Lang_chg.SelectSkills[config.language]}
-                  placeholderStyle={{ color: Colors.loremtxt }}
-                  selectedTextStyle={{
-                    color: Colors.whitetxt,
-                    left: (mobileWidth * 3) / 100,
-                    fontSize: (mobileWidth * 3.4) / 100,
-                  }}
-                  placeholderTextColor={Colors.placeholdertxtcolor}
-                  value={business}
-                  onChange={item => {
-                    setBusiness(item.value);
-                    setErrors(prev => ({ ...prev, business: '' }));
-                  }}
-                  renderRightIcon={() => (
-                    <Image
-                      source={require('../Icons/dropppp.png')}
-                      style={styles.customIcon}
-                    />
-                  )}
+               <Dropdown
+              style={styles.inputContainerStyle}
+              data={businessOptions}
+              labelField="label"
+              valueField="value"
+              placeholder={Lang_chg.SelectSkills[config.language]}
+              placeholderStyle={{ color: Colors.loremtxt }}
+              placeholderTextColor={Colors.placeholdertxtcolor}
+              selectedTextStyle={styles.selectedTextStyle}
+              iconStyle={styles.iconStyle}
+              value={business}
+              onChange={item => {
+                setBusiness(item.value);
+                setErrors(prev => ({ ...prev, business: '' }));
+              }}
+              renderRightIcon={() => (
+                <Image
+                  source={require('../Icons/dropppp.png')}
+                  style={styles.customIcon}
                 />
+              )}
+            />
                 {errors.business ? (
                   <Text style={styles.errorText}>{errors.business}</Text>
                 ) : null}
@@ -802,7 +799,7 @@ const SignUp = ({ navigation, route }) => {
 
                 }}
               >
-                {dob || "select dob"}
+                {dob || Lang_chg.Select_Dob[config.language]}
 
               </Text>
               <TouchableOpacity onPress={() => setShow(true)}>
