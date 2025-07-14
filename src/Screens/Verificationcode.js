@@ -24,7 +24,7 @@ const Verificationcode = ({ route,navigation }) => {
    const [error, setError] = useState('');
      const [tab, settab] = useState('Current');
    
-   
+   //Abhi
      const [otp, setOtp] = useState('');
        
        const otpInputRef = useRef(null);

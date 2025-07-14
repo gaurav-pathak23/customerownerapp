@@ -24,7 +24,7 @@ const [LAtitude, setlatitude] = useState(0)
 console.log(LAtitude,"LAtitude.....")
 const [LOngitutude, setlongitude] = useState(0)
 console.log(LOngitutude,"LOngitutude....................");
-
+//Abhi
   const requestLocationPermission = async () => {
     if (Platform.OS === 'ios') {
       getCurrentLocation(); // iOS auto-prompts for permission

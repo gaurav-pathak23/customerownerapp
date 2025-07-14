@@ -23,7 +23,7 @@ const mobileWidth = Dimensions.get('window').width;
 const VerifyPassword = ({ navigation }) => {
 const [error, setError] = useState('');
   const [tab, settab] = useState('Current');
-
+//Abhi
 
   const [otp, setOtp] = useState('');
     

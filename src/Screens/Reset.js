@@ -19,7 +19,7 @@ import {
   confirmPassword,
 } from '../validators';
 const mobileWidth = Dimensions.get('window').width;
-
+//Abhi
 const Reset = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
