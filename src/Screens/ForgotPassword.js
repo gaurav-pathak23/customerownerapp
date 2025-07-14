@@ -9,14 +9,14 @@ import {
   TouchableOpacity,
   TextInput,
   Alert,
-  StatusBar,
-  ScrollView,
 } from 'react-native';
 import React, { useState ,useEffect } from 'react';
 import { Colors } from '../Colorfont/Color';
 import { validateEmail } from '../validators';
 const mobileWidth = Dimensions.get('window').width;
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Lang_chg } from '../Language/Language_provider';
+import { config } from '../Language/configProvider';
 const ForgotPassword = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [errors, setErrors] = useState({ email: '', });
@@ -46,7 +46,6 @@ useEffect(() => {
   fetchData();
 }, []);
 
-//Abhi
 
 const validateForm = async () => {
   let newErrors = { email: '' };
@@ -63,7 +62,7 @@ const validateForm = async () => {
     const storedData = await AsyncStorage.getItem(key);
 
     if (!storedData) {
-      newErrors.email = 'No account found. Please sign up.';
+      newErrors.email = Lang_chg.no_account_found[config.language];
       setErrors(newErrors);
       return;
     }
@@ -71,19 +70,33 @@ const validateForm = async () => {
     const parsedData = JSON.parse(storedData);
 
     if (!parsedData.email || parsedData.email !== email) {
-      newErrors.email = 'Email not found. Please check or sign up.';
+      newErrors.email =  Lang_chg.no_account_found[config.language];
       setErrors(newErrors);
       return;
     }
 
-    // ✅ Email matched — navigate to next screen
+    // const parsedData = storedData ? JSON.parse(storedData) : null;
+    
+    // if (!parsedData) {
+    //   setErrors({
+    //     email: Lang_chg.no_account_found[config.language],
+    //     password: '',
+    //   });
+    //   return;
+    // }
+
+
+
+
+
+ 
     setErrors({ email: '' });
     Alert.alert('Success', 'Email verified');
     navigation.navigate('VerifyPassword');
 
   } catch (err) {
     console.error('Validation Error:', err);
-    newErrors.email = 'Something went wrong. Please try again.';
+    newErrors.email = Lang_chg.SomethingwentwrongPleasetryagain[config.language];
     setErrors(newErrors);
   }
 };
@@ -109,10 +122,8 @@ const validateForm = async () => {
         style={styles.background}
         resizeMode="cover"
       >
-        <ScrollView>
-         <StatusBar barStyle="light-content" hidden={false} backgroundColor={Colors.layercolor} />
-        <Text style={styles.signintext}>Sign In</Text>
-        <Text style={styles.text}>Enter your details below & Login</Text>
+        <Text style={styles.signintext}>{Lang_chg.signin[config.language]}</Text>
+        <Text style={styles.text}>{Lang_chg.enterDetailsBelow[config.language]}</Text>
         <View style={{ padding: (mobileWidth * 7.2) / 100 }}>
           <View style={styles.tabview}>
             <TouchableOpacity
@@ -132,7 +143,7 @@ const validateForm = async () => {
                   { fontWeight: tab === 'Current' ? '700' : '300' },
                 ]}
               >
-                Worker
+                 {Lang_chg.Workertxt[config.language]}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -152,15 +163,15 @@ const validateForm = async () => {
                   { fontWeight: tab === 'Current' ? '300' : '700' },
                 ]}
               >
-                Owner
+                 {Lang_chg.Ownertxt[config.language]}
               </Text>
             </TouchableOpacity>
           </View>
           <View style={styles.bottomline}></View>
 
-          <Text style={styles.Emailtext}>Email Address</Text>
+          <Text style={styles.Emailtext}>{Lang_chg.EmailAddress[config.language]}</Text>
           <TextInput
-            placeholder="Enter Email Address"
+            placeholder={Lang_chg.EnterEmailtxt[config.language]}
             placeholderTextColor={Colors.loremtxt}
             maxLength={40}
             value={email}
@@ -189,17 +200,17 @@ const validateForm = async () => {
             style={styles.emailloginbutton}
             onPress={validateForm}
           >
-            <Text style={styles.mobileemailtext}>Send</Text>
+            <Text style={styles.mobileemailtext}>{Lang_chg.Send_[config.language]}</Text>
           </TouchableOpacity>
                        <TouchableOpacity onPress={()=>navigation.goBack('SignIn')} style={{marginTop:mobileWidth*5/100}}>
-                        <Text style={styles.mobileemailtext}>Back to login</Text>
+                        <Text style={styles.mobileemailtext}>{Lang_chg.back_to_login[config.language]}</Text>
                         </TouchableOpacity>
           <TouchableOpacity
            onPress={()=>navigation.navigate('Mobilelogin')}
             activeOpacity={0.8}
             style={styles.mobileloginbutton}
           >
-            <Text style={styles.mobileemailtext}>Continue with Mobile</Text>
+            <Text style={styles.mobileemailtext}>{Lang_chg.continueMobiletxt[config.language]}</Text>
           </TouchableOpacity>
 
           <View style={styles.socialloginview}>
@@ -229,13 +240,12 @@ const validateForm = async () => {
               marginTop: (mobileWidth * 6) / 100,
             }}
           >
-            <Text style={styles.text}> if you do not have account? </Text>
+            <Text style={styles.text}>{Lang_chg.dontHaveAccount[config.language]}</Text>
             <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-            <Text style={styles.signuptext}>Sign Up</Text>
+            <Text style={styles.signuptext}>{Lang_chg.signup[config.language]}</Text>
             </TouchableOpacity>
           </View>
         </View>
-        </ScrollView>
       </ImageBackground>
     </View>
   );

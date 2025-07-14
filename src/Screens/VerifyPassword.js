@@ -8,22 +8,20 @@ import {
   Dimensions,
   TouchableOpacity,
   TextInput,
-  Alert,
-  StatusBar,
-  ScrollView,
+  Alert,StatusBar
 } from 'react-native';
 import React, { useState ,useRef } from 'react';
 import { Colors } from '../Colorfont/Color';
 import OTPTextInput from 'react-native-otp-textinput';
-
-
+import { Lang_chg } from '../Language/Language_provider';
+import { config } from '../Language/configProvider';
 const mobileWidth = Dimensions.get('window').width;
 
 
 const VerifyPassword = ({ navigation }) => {
 const [error, setError] = useState('');
   const [tab, settab] = useState('Current');
-//Abhi
+
 
   const [otp, setOtp] = useState('');
     
@@ -32,12 +30,12 @@ const [error, setError] = useState('');
 
   const handleVerify = () => {
     if (otp.length !== 4) {
-      setError('Please enter a valid 4-digit OTP');
+      setError (Lang_chg.enter_valid_otp[config.language]);
       return;
     }
 
     setError('');
-    Alert.alert('Success', `Entered OTP: ${otp}`);
+     Alert.alert(`${Lang_chg.Entervcode[config.language]}: ${otp}`);
     // Proceed to next screen or API verification
     navigation.navigate('Reset')
   };
@@ -55,16 +53,16 @@ const [error, setError] = useState('');
 
   return (
     <View>
+              <StatusBar barStyle="light-content" hidden={false} backgroundColor={Colors.statusbar} />
+      
       <ImageBackground
         source={require('../Icons/splashscreen.png')}
         // source={require('../Icons/splashscreen.png')}
         style={styles.background}
         resizeMode="cover"
       >
-          <ScrollView>
-         <StatusBar barStyle="light-content" hidden={false} backgroundColor={Colors.layercolor} />
-        <Text style={styles.signintext}>Sign In</Text>
-        <Text style={styles.text}>Enter your details below & Login</Text>
+        <Text style={styles.signintext}>{Lang_chg.signin[config.language]}</Text>
+        <Text style={styles.text}>{Lang_chg.enterDetailsBelow[config.language]}</Text>
         <View style={{ padding: (mobileWidth * 7.2) / 100 }}>
           <View style={styles.tabview}>
             <TouchableOpacity
@@ -84,7 +82,7 @@ const [error, setError] = useState('');
                   { fontWeight: tab === 'Current' ? '700' : '300' },
                 ]}
               >
-                Worker
+                {Lang_chg.Workertxt[config.language]}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -104,13 +102,13 @@ const [error, setError] = useState('');
                   { fontWeight: tab === 'Current' ? '300' : '700' },
                 ]}
               >
-                Owner
+                 {Lang_chg.Ownertxt[config.language]}
               </Text>
             </TouchableOpacity>
           </View>
           <View style={styles.bottomline}></View>
 
-          <Text style={styles.Emailtext}>Enter Varification Code</Text>
+          <Text style={styles.Emailtext}> {Lang_chg.EnterVarificationCode[config.language]}</Text>
           <OTPTextInput
         ref={otpInputRef}
         inputCount={4}
@@ -130,12 +128,12 @@ const [error, setError] = useState('');
             style={styles.emailloginbutton}
             onPress={()=>handleVerify()}
           >
-            <Text style={styles.mobileemailtext}>Send</Text>
+            <Text style={styles.mobileemailtext}>{Lang_chg.Send_[config.language]}</Text>
           </TouchableOpacity>
                        <TouchableOpacity style={{marginTop:mobileWidth*5/100 ,flexDirection:"row",justifyContent:"center"}}>
-                        <Text style={styles.mobileemailtext}>If you didn't receive a code</Text>
+                        <Text style={styles.mobileemailtext}>{Lang_chg.Ifyoudidntcode[config.language]}</Text>
                         <TouchableOpacity activeOpacity={0.8} onPress={()=>handleResend()}>
-                        <Text style={styles.resendtext}>Resend</Text>
+                        <Text style={styles.resendtext}>{Lang_chg.Resend[config.language]}</Text>
                         </TouchableOpacity>
                         </TouchableOpacity>
           <TouchableOpacity
@@ -143,7 +141,7 @@ const [error, setError] = useState('');
             activeOpacity={0.8}
             style={styles.mobileloginbutton}
           >
-            <Text style={styles.mobileemailtext}>Continue with Mobile</Text>
+            <Text style={styles.mobileemailtext}>{Lang_chg.continueMobiletxt[config.language]}</Text>
           </TouchableOpacity>
 
           <View style={styles.socialloginview}>
@@ -173,13 +171,12 @@ const [error, setError] = useState('');
               marginTop: (mobileWidth * 6) / 100,
             }}
           >
-            <Text style={styles.text}> if you do not have account? </Text>
+            <Text style={styles.text}>{Lang_chg.dontHaveAccount[config.language]}</Text>
              <TouchableOpacity  onPress={()=>navigation.navigate('SignUp')}>
-            <Text style={styles.signuptext}>Sign Up</Text>
+            <Text style={styles.signuptext}>{Lang_chg.signup[config.language]}</Text>
             </TouchableOpacity>
           </View>
         </View>
-        </ScrollView>
       </ImageBackground>
     </View>
   );
@@ -205,6 +202,7 @@ const styles = StyleSheet.create({
     borderColor: '#EFF2F1',
     color: '#121A23',
     fontSize: 20,
+    marginTop:mobileWidth*4/100
   },
   verifyotp_text: {
     fontSize: mobileWidth * 4 / 100,
@@ -337,4 +335,3 @@ const styles = StyleSheet.create({
     marginTop: mobileWidth*3/100,
   },
 });
-

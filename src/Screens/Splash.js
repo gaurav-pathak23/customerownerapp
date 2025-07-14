@@ -43,6 +43,7 @@ console.log(LOngitutude,"LOngitutude....................");
 
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
           getCurrentLocation();
+          requestLocationPermission()
         } else {
           Alert.alert(
             'Permission Denied',
