@@ -1,9 +1,9 @@
 import { View, Text ,StyleSheet ,Dimensions ,Image ,ImageBackground, TouchableOpacity, StatusBar} from 'react-native'
 import React ,{useState}from 'react'
-import { Colors, Font } from '../Colorfont/Color';
+import { Colors, Font } from '../themestyle/Color';
 import { Dropdown } from 'react-native-element-dropdown';
-import { Lang_chg } from '../Language/Language_provider';
-import { config } from '../Language/configProvider';
+import { Lang_chg } from '../language/Language_provider';
+import { config } from '../language/configProvider';
 const mobileW = Dimensions.get('window').width;
 const mobileH = Dimensions.get('window').height;
    const data2 = [
@@ -41,7 +41,7 @@ const [isFocus, setIsFocus] = useState(false);
   return (
     <View>
           <ImageBackground
-            source={require('../Icons/splashscreen.png')}
+            source={require('../icons/splashscreen.png')}
             style={styles.background}
             resizeMode="cover"
           >
@@ -49,7 +49,7 @@ const [isFocus, setIsFocus] = useState(false);
             <Image
               resizeMode="contain"
               style={styles.image}
-              source={require('../Icons/haathsath.png')}/>
+              source={require('../icons/haathsath.png')}/>
              <Text style={styles.Language}>Choose Your Language</Text>
           
                    <View>
@@ -80,7 +80,7 @@ const [isFocus, setIsFocus] = useState(false);
                         }}
                         renderRightIcon={() => (
                                 <Image
-                                  source={require('../Icons/dropppp.png')}
+                                  source={require('../icons/dropppp.png')}
                                   style={styles.customIcon}
                                 />
                               )}

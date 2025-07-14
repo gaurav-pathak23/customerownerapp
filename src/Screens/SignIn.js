@@ -12,12 +12,12 @@ import {
   ScrollView,
 } from 'react-native';
 import React, { useState, useEffect } from 'react';
-import { Colors } from '../Colorfont/Color';
+import { Colors } from '../themestyle/Color';
 import { validateEmail, validatePassword } from '../validators';
 const mobileWidth = Dimensions.get('window').width;
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Lang_chg } from '../Language/Language_provider';
-import { config } from '../Language/configProvider';
+import { Lang_chg } from '../language/Language_provider';
+import { config } from '../language/configProvider';
 const SignIn = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -45,13 +45,8 @@ const SignIn = ({ navigation }) => {
     fetchData();
   }, []);
 
-
-
-
   const validateForm = async () => {
     let newErrors = { email: '', password: '' };
-
-    // Step 1: Regex validations
     const emailError = validateEmail(email);
     if (emailError) {
       newErrors.email = emailError;
@@ -65,58 +60,67 @@ const SignIn = ({ navigation }) => {
       setErrors(newErrors);
       return;
     }
-
-    // Step 2: Check against stored user
     try {
       const key = tab === 'Current' ? 'workerdata' : 'OwnerData';
       const storedData = await AsyncStorage.getItem(key);
-      console.log(storedData, "storedata!!!!");
+      console.log(storedData, 'storedata!!!!');
 
       if (!storedData) {
-        setErrors({ email: Lang_chg.accountNotFound[config.language], password: '' });
+        setErrors({
+          email: Lang_chg.accountNotFound[config.language],
+          password: '',
+        });
         return;
       }
 
       const parsedData = JSON.parse(storedData);
 
       if (parsedData.email !== email) {
-        setErrors({ email: Lang_chg.emailMismatch[config.language], password: '' });
+        setErrors({
+          email: Lang_chg.emailMismatch[config.language],
+          password: '',
+        });
         return;
       }
 
       if (parsedData.password !== password) {
-        setErrors({ email: '', password: Lang_chg.incorrect_password[config.language] });
+        setErrors({
+          email: '',
+          password: Lang_chg.incorrect_password[config.language],
+        });
         return;
       }
-
-      // Step 3: All good — store session & navigate
       setErrors({ email: '', password: '' });
 
       await AsyncStorage.setItem('loggedInUser', JSON.stringify(parsedData));
       Alert.alert(Lang_chg.Successful[config.language]);
       navigation.navigate('Home');
-
     } catch (error) {
       console.log('Validation error:', error);
       Alert.alert(Lang_chg.error_login[config.language]);
     }
   };
 
-
-
   return (
     <View>
       <ImageBackground
-        source={require('../Icons/splashscreen.png')}
+        source={require('../icons/splashscreen.png')}
         style={styles.background}
         resizeMode="cover"
       >
         <ScrollView>
-          <StatusBar barStyle="light-content" hidden={false} backgroundColor={Colors.layercolor} />
-          <Text style={styles.signintext}>{Lang_chg.signin[config.language]}</Text>
+          <StatusBar
+            barStyle="light-content"
+            hidden={false}
+            backgroundColor={Colors.layercolor}
+          />
+          <Text style={styles.signintext}>
+            {Lang_chg.signin[config.language]}
+          </Text>
 
-
-          <Text style={styles.text}>{Lang_chg.enterDetailsBelow[config.language]}</Text>
+          <Text style={styles.text}>
+            {Lang_chg.enterDetailsBelow[config.language]}
+          </Text>
           <View style={{ padding: (mobileWidth * 7.2) / 100 }}>
             <View style={styles.tabview}>
               <TouchableOpacity
@@ -134,7 +138,8 @@ const SignIn = ({ navigation }) => {
                   style={[
                     styles.vendortext,
                     { fontWeight: tab === 'Current' ? '700' : '300' },
-                  ]} >
+                  ]}
+                >
                   {Lang_chg.Workertxt[config.language]}
                 </Text>
               </TouchableOpacity>
@@ -161,14 +166,10 @@ const SignIn = ({ navigation }) => {
             </View>
             <View style={styles.bottomline}></View>
 
-            {/* <Text style={styles.Emailtext}>Email Address</Text> */}
-            <Text style={styles.Emailtext}>{Lang_chg.EmailAddress[config.language]}</Text>
+            <Text style={styles.Emailtext}>
+              {Lang_chg.EmailAddress[config.language]}
+            </Text>
 
-            {/*  */}
-            {/* <Text style={styles.label}>{Lang_chg.getText('EmailAddress')}</Text>
-      <Text style={styles.label}>{Lang_chg.getText('Password')}</Text>
-      <Text style={styles.label}>{Lang_chg.getText('Login')}</Text> */}
-            {/*  */}
             <TextInput
               placeholder={Lang_chg.EnterEmailtxt[config.language]}
               placeholderTextColor={Colors.loremtxt}
@@ -191,7 +192,9 @@ const SignIn = ({ navigation }) => {
               <Text style={styles.errorText}>{errors.email}</Text>
             ) : null}
 
-            <Text style={styles.Emailtext}>{Lang_chg.Passwordtxt[config.language]}</Text>
+            <Text style={styles.Emailtext}>
+              {Lang_chg.Passwordtxt[config.language]}
+            </Text>
             <View style={styles.inputWrapper}>
               <TextInput
                 placeholderTextColor={Colors.loremtxt}
@@ -219,30 +222,27 @@ const SignIn = ({ navigation }) => {
                 <Image
                   source={
                     secureText
-                      ? require('../Icons/EyeSlash.png')
-                      : require('../Icons/Eye.png')
+                      ? require('../icons/EyeSlash.png')
+                      : require('../icons/Eye.png')
                   }
                   resizeMode="contain"
-                  style={{
-                    width: 24,
-                    height: 24,
-                    tintColor: 'white',
-                    right: (mobileWidth * 8) / 100,
-                    marginTop: (mobileWidth * 5) / 100,
-                  }}
+                  style={styles.EYEicon}
                 />
               </TouchableOpacity>
             </View>
             {errors.password ? (
-              <Text style={styles.errorText}>{Lang_chg.incorrect_password[config.language]}</Text>
-              // <Text style={styles.errorText}>{errors.password}</Text>
+              <Text style={styles.errorText}>
+                {Lang_chg.incorrect_password[config.language]}
+              </Text>
             ) : null}
 
             <TouchableOpacity
               activeOpacity={0.8}
               onPress={() => navigation.navigate('ForgotPassword')}
             >
-              <Text style={[styles.forgotpasswordtext]}>{Lang_chg.forgotPassword[config.language]}</Text>
+              <Text style={[styles.forgotpasswordtext]}>
+                {Lang_chg.forgotPassword[config.language]}
+              </Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -250,7 +250,9 @@ const SignIn = ({ navigation }) => {
               style={styles.emailloginbutton}
               onPress={validateForm}
             >
-              <Text style={styles.mobileemailtext}>{Lang_chg.continueemaitxt[config.language]}</Text>
+              <Text style={styles.mobileemailtext}>
+                {Lang_chg.continueemaitxt[config.language]}
+              </Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -258,39 +260,45 @@ const SignIn = ({ navigation }) => {
               activeOpacity={0.8}
               style={styles.mobileloginbutton}
             >
-              <Text style={styles.mobileemailtext}>{Lang_chg.continueMobiletxt[config.language]}</Text>
+              <Text style={styles.mobileemailtext}>
+                {Lang_chg.continueMobiletxt[config.language]}
+              </Text>
             </TouchableOpacity>
 
             <View style={styles.socialloginview}>
-              <TouchableOpacity activeOpacity={0.8} style={styles.gooleloginview}>
-                <Image
-                  resizeMode="contain"
-                  style={styles.googleicon}
-                  source={require('../Icons/gooogle.png')}
-                />
-              </TouchableOpacity>
               <TouchableOpacity
                 activeOpacity={0.8}
-                style={[styles.gooleloginview, { left: (mobileWidth * 3) / 100 }]}
+                style={styles.gooleloginview}
               >
                 <Image
                   resizeMode="contain"
                   style={styles.googleicon}
-                  source={require('../Icons/AppleLogo.png')}
+                  source={require('../icons/gooogle.png')}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                style={[
+                  styles.gooleloginview,
+                  { left: (mobileWidth * 3) / 100 },
+                ]}
+              >
+                <Image
+                  resizeMode="contain"
+                  style={styles.googleicon}
+                  source={require('../icons/AppleLogo.png')}
                 />
               </TouchableOpacity>
             </View>
 
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-around',
-                marginTop: (mobileWidth * 6) / 100,
-              }}
-            >
-              <Text style={styles.text}>{Lang_chg.dontHaveAccount[config.language]}</Text>
+            <View style={styles.BOTTOMVIEW}>
+              <Text style={styles.text}>
+                {Lang_chg.dontHaveAccount[config.language]}
+              </Text>
               <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-                <Text style={styles.signuptext}>{Lang_chg.signup[config.language]}</Text>
+                <Text style={styles.signuptext}>
+                  {Lang_chg.signup[config.language]}
+                </Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -299,10 +307,6 @@ const SignIn = ({ navigation }) => {
     </View>
   );
 };
-
-
-
-
 export default SignIn;
 const styles = StyleSheet.create({
   background: {
@@ -313,6 +317,18 @@ const styles = StyleSheet.create({
     width: (mobileWidth * 6) / 100,
     height: (mobileWidth * 6) / 100,
     alignSelf: 'center',
+  },
+  BOTTOMVIEW: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: (mobileWidth * 6) / 100,
+  },
+  EYEicon: {
+    width: 24,
+    height: 24,
+    tintColor: 'white',
+    right: (mobileWidth * 8) / 100,
+    marginTop: (mobileWidth * 5) / 100,
   },
   gooleloginview: {
     width: (mobileWidth * 42) / 100,
@@ -408,14 +424,13 @@ const styles = StyleSheet.create({
     height: (mobileWidth * 11) / 100,
     borderRadius: (mobileWidth * 3) / 100,
     borderWidth: (mobileWidth * 0) / 100,
-    // backgroundColor: Colors.bgColor, // adjust if needed
   },
   forgotpasswordtext: {
     color: Colors.whitetxt,
     textDecorationLine: 'underline',
     fontSize: (mobileWidth * 3.5) / 100,
     marginTop: (mobileWidth * 5) / 100,
-    textAlign: "right"
+    textAlign: 'right',
   },
   signuptext: {
     color: Colors.whitetxt,
@@ -430,87 +445,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     color: Colors.validatecolor,
-    fontSize: mobileWidth * 3 / 100,
-    marginTop: mobileWidth * 4 / 100,
+    fontSize: (mobileWidth * 3) / 100,
+    marginTop: (mobileWidth * 4) / 100,
   },
 });
-
-// LocationScreen.js get location axis from useres
-
-// ---------------------------------------------------
-// using pin code get curent  location
-// import React, { useState } from 'react';
-// import { View, TextInput, Button, Alert, StyleSheet, Text } from 'react-native';
-// import MapView, { Marker } from 'react-native-maps';
-// import axios from 'axios';
-
-// const SignIn = () => {
-//   const [pincode, setPincode] = useState('');
-//   const [region, setRegion] = useState(null);
-
-//   const fetchCoordinates = async () => {
-//     if (pincode.length !== 6) {
-//       Alert.alert('Invalid PIN', 'Enter a valid 6-digit pincode');
-//       return;
-//     }
-
-//     try {
-//       const apiKey = 'AIzaSyCk-EiSxWJvM4f3kO8vHyzcYTOZIbwz8fA';
-//       const response = await axios.get(
-//         `https://maps.googleapis.com/maps/api/geocode/json?components=postal_code:${pincode}|country:IN&key=${apiKey}`
-//       );
-
-//       const results = response.data.results;
-//       if (results.length > 0) {
-//         const { lat, lng } = results[0].geometry.location;
-//         setRegion({
-//           latitude: lat,
-//           longitude: lng,
-//           latitudeDelta: 0.01,
-//           longitudeDelta: 0.01,
-//         });
-//       } else {
-//         Alert.alert('Not Found', 'No location found');
-//       }
-//     } catch (err) {
-//       console.error('Error:', err);
-//       Alert.alert('Error', 'Could not fetch location');
-//     }
-//   };
-
-//   return (
-//     <View style={styles.container}>
-//       <TextInput
-//         value={pincode}
-//         onChangeText={setPincode}
-//         placeholder="Enter Pincode"
-//         keyboardType="numeric"
-//         maxLength={6}
-//         style={styles.input}
-//       />
-//       <Button title="Show Map" onPress={fetchCoordinates} />
-
-//       {region && (
-//         <MapView style={styles.map} region={region} provider="google">
-//           <Marker coordinate={region} />
-//         </MapView>
-//       )}
-//     </View>
-//   );
-// };
-
-// const styles = StyleSheet.create({
-//   container: { padding: 10, flex: 1 },
-//   input: {
-//     borderWidth: 1,
-//     borderColor: '#aaa',
-//     padding: 10,
-//     marginBottom: 10,
-//     borderRadius: 4,
-//   },
-//   map: { height: 300, width: '100%', marginTop: 10 },
-// });
-
-// export default SignIn;
-
-

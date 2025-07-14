@@ -18,12 +18,11 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import CustomDrawer from '../CustomDrawer';
 import Home from './bottom/Home';
 import Profile from './bottom/Profile';
-//  import Menudetails from '../Menudetails';
 const mobileW = Dimensions.get('window').width;
 const mobileH = Dimensions.get('window').height;
 const Stack = createNativeStackNavigator();
   const Drawer = createDrawerNavigator();
-// import BottomTabNavigator from '../bottom-tabs/BottomTabNavigator';
+
 const Stacknav = (navigation) => {
     // ------------------------
 function DrawerNavigator({ navigation }) {

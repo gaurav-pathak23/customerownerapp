@@ -20,11 +20,11 @@
 //     <Drawer.Navigator  drawerContent ={ props => <CustomDrawer {...props}/>} 
 //      initialRouteName="Profile" screenOptions={{headerShown:false}}>
 //                   <Drawer.Screen  name="Profile"  component={Profile} options = {{drawerIcon :({color})=> (<Image resizeMode='contain' style={{width:mobileW*6/100, height:mobileW*6/100, alignSelf:'center',}}
-//   source={require('../src/Icons/Broom.png')}></Image>)}}/>
+//   source={require('../src/icons/Broom.png')}></Image>)}}/>
 
 // <Drawer.Screen name="Chef" component={Chef}options= {{drawerIcon :({color})=> (
 // <Image resizeMode='contain' style={{width:mobileW*6/100, height:mobileW*6/100, alignSelf:'center'}}
-//     source={require('../src/Icons/Broom.png')}></Image>)}}/>
+//     source={require('../src/icons/Broom.png')}></Image>)}}/>
  
 
 
@@ -69,7 +69,7 @@ const DrawerScreen = () => {
           options={{
             drawerIcon: ({ color, size }) => (
               <Image
-                source={require('../src/Icons/Broom.png')}
+                source={require('../src/icons/Broom.png')}
                 resizeMode="contain"
                 style={{
                   width: mobileW * 6 / 100,
@@ -86,7 +86,7 @@ const DrawerScreen = () => {
           options={{
             drawerIcon: ({ color, size }) => (
               <Image
-                source={require('../src/Icons/Broom.png')}
+                source={require('../src/icons/Broom.png')}
                 resizeMode="contain"
                 style={{
                   width: mobileW * 6 / 100,

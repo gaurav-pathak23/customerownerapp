@@ -11,12 +11,12 @@ import {
   Alert,
 } from 'react-native';
 import React, { useState ,useEffect } from 'react';
-import { Colors } from '../Colorfont/Color';
+import { Colors } from '../themestyle/Color';
 import { validateEmail } from '../validators';
 const mobileWidth = Dimensions.get('window').width;
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Lang_chg } from '../Language/Language_provider';
-import { config } from '../Language/configProvider';
+import { Lang_chg } from '../language/Language_provider';
+import { config } from '../language/configProvider';
 const ForgotPassword = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [errors, setErrors] = useState({ email: '', });
@@ -30,8 +30,6 @@ useEffect(() => {
       
       const OwnerData = await AsyncStorage.getItem('OwnerData');
       console.log(OwnerData,"ownerdata  forgot password screen !!!");
-      
-
       if (workerdata) {
         console.log('Loaded worker Data:', JSON.parse(workerdata));
       }
@@ -75,21 +73,7 @@ const validateForm = async () => {
       return;
     }
 
-    // const parsedData = storedData ? JSON.parse(storedData) : null;
     
-    // if (!parsedData) {
-    //   setErrors({
-    //     email: Lang_chg.no_account_found[config.language],
-    //     password: '',
-    //   });
-    //   return;
-    // }
-
-
-
-
-
- 
     setErrors({ email: '' });
     Alert.alert('Success', 'Email verified');
     navigation.navigate('VerifyPassword');
@@ -101,24 +85,10 @@ const validateForm = async () => {
   }
 };
 
-
-  // const validateForm = () => {
-  //   let newErrors = { email: '', password: '' };
-  //     const emailError = validateEmail(email);
-  //     if (emailError) {
-  //       newErrors.email = emailError;
-  //       setErrors(newErrors);
-  //       return;
-  //     }
-  //     setErrors({ email: '',});
-  //     Alert.alert('Success', 'Form is valid!');
-  //     navigation.navigate('VerifyPassword');
-  //   };
-
   return (
     <View>
       <ImageBackground
-        source={require('../Icons/splashscreen.png')}
+        source={require('../icons/splashscreen.png')}
         style={styles.background}
         resizeMode="cover"
       >
@@ -191,11 +161,7 @@ const validateForm = async () => {
           {errors.email ? (
             <Text style={styles.errorText}>{errors.email}</Text>
           ) : null}
-
-          
-         
-
-          <TouchableOpacity
+        <TouchableOpacity
             activeOpacity={0.8}
             style={styles.emailloginbutton}
             onPress={validateForm}
@@ -218,7 +184,7 @@ const validateForm = async () => {
               <Image
                 resizeMode="contain"
                 style={styles.googleicon}
-                source={require('../Icons/gooogle.png')}
+                source={require('../icons/gooogle.png')}
               />
             </TouchableOpacity>
             <TouchableOpacity
@@ -228,7 +194,7 @@ const validateForm = async () => {
               <Image
                 resizeMode="contain"
                 style={styles.googleicon}
-                source={require('../Icons/appleicon.png')}
+                source={require('../icons/appleicon.png')}
               />
             </TouchableOpacity>
           </View>
@@ -250,9 +216,6 @@ const validateForm = async () => {
     </View>
   );
 };
-
-
-
 
 export default ForgotPassword;
 const styles = StyleSheet.create({

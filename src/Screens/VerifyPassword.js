@@ -1,4 +1,3 @@
-
 import {
   View,
   Text,
@@ -8,61 +7,57 @@ import {
   Dimensions,
   TouchableOpacity,
   TextInput,
-  Alert,StatusBar
+  Alert,
+  StatusBar,
 } from 'react-native';
-import React, { useState ,useRef } from 'react';
-import { Colors } from '../Colorfont/Color';
+import React, { useState, useRef } from 'react';
+import { Colors } from '../themestyle/Color';
 import OTPTextInput from 'react-native-otp-textinput';
-import { Lang_chg } from '../Language/Language_provider';
-import { config } from '../Language/configProvider';
+import { Lang_chg } from '../language/Language_provider';
+import { config } from '../language/configProvider';
 const mobileWidth = Dimensions.get('window').width;
 
-
 const VerifyPassword = ({ navigation }) => {
-const [error, setError] = useState('');
+  const [error, setError] = useState('');
   const [tab, settab] = useState('Current');
-
-
   const [otp, setOtp] = useState('');
-    
-    const otpInputRef = useRef(null);
-  
-
+  const otpInputRef = useRef(null);
   const handleVerify = () => {
     if (otp.length !== 4) {
-      setError (Lang_chg.enter_valid_otp[config.language]);
+      setError(Lang_chg.enter_valid_otp[config.language]);
       return;
     }
 
     setError('');
-     Alert.alert(`${Lang_chg.Entervcode[config.language]}: ${otp}`);
-    // Proceed to next screen or API verification
-    navigation.navigate('Reset')
+    Alert.alert(`${Lang_chg.Entervcode[config.language]}: ${otp}`);
+    navigation.navigate('Reset');
   };
 
-    
-
-    
-  
   const handleResend = () => {
-      // Implement resend OTP logic here
-      Alert.alert('OTP Resent');
-      otpInputRef.current?.clear(); // clear existing OTP
-      setOtp('');
-    };
+    Alert.alert('OTP Resent');
+    otpInputRef.current?.clear(); // clear existing OTP
+    setOtp('');
+  };
 
   return (
     <View>
-              <StatusBar barStyle="light-content" hidden={false} backgroundColor={Colors.statusbar} />
-      
+      <StatusBar
+        barStyle="light-content"
+        hidden={false}
+        backgroundColor={Colors.statusbar}
+      />
+
       <ImageBackground
-        source={require('../Icons/splashscreen.png')}
-        // source={require('../Icons/splashscreen.png')}
+        source={require('../icons/splashscreen.png')}
         style={styles.background}
         resizeMode="cover"
       >
-        <Text style={styles.signintext}>{Lang_chg.signin[config.language]}</Text>
-        <Text style={styles.text}>{Lang_chg.enterDetailsBelow[config.language]}</Text>
+        <Text style={styles.signintext}>
+          {Lang_chg.signin[config.language]}
+        </Text>
+        <Text style={styles.text}>
+          {Lang_chg.enterDetailsBelow[config.language]}
+        </Text>
         <View style={{ padding: (mobileWidth * 7.2) / 100 }}>
           <View style={styles.tabview}>
             <TouchableOpacity
@@ -102,46 +97,64 @@ const [error, setError] = useState('');
                   { fontWeight: tab === 'Current' ? '300' : '700' },
                 ]}
               >
-                 {Lang_chg.Ownertxt[config.language]}
+                {Lang_chg.Ownertxt[config.language]}
               </Text>
             </TouchableOpacity>
           </View>
           <View style={styles.bottomline}></View>
 
-          <Text style={styles.Emailtext}> {Lang_chg.EnterVarificationCode[config.language]}</Text>
+          <Text style={styles.Emailtext}>
+            {' '}
+            {Lang_chg.EnterVarificationCode[config.language]}
+          </Text>
           <OTPTextInput
-        ref={otpInputRef}
-        inputCount={4}
-        tintColor="#00959E"
-        offTintColor="#EFF2F1"
-        textInputStyle={styles.otpInput}
-        handleTextChange={setOtp}
-        keyboardType="numeric"
-      />
+            ref={otpInputRef}
+            inputCount={4}
+            tintColor="#00959E"
+            offTintColor="#EFF2F1"
+            textInputStyle={styles.otpInput}
+            handleTextChange={setOtp}
+            keyboardType="numeric"
+          />
 
-      {error ? <Text style={styles.errorText}>{error}</Text> : null}
-
-         
+          {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
           <TouchableOpacity
             activeOpacity={0.8}
             style={styles.emailloginbutton}
-            onPress={()=>handleVerify()}
+            onPress={() => handleVerify()}
           >
-            <Text style={styles.mobileemailtext}>{Lang_chg.Send_[config.language]}</Text>
+            <Text style={styles.mobileemailtext}>
+              {Lang_chg.Send_[config.language]}
+            </Text>
           </TouchableOpacity>
-                       <TouchableOpacity style={{marginTop:mobileWidth*5/100 ,flexDirection:"row",justifyContent:"center"}}>
-                        <Text style={styles.mobileemailtext}>{Lang_chg.Ifyoudidntcode[config.language]}</Text>
-                        <TouchableOpacity activeOpacity={0.8} onPress={()=>handleResend()}>
-                        <Text style={styles.resendtext}>{Lang_chg.Resend[config.language]}</Text>
-                        </TouchableOpacity>
-                        </TouchableOpacity>
           <TouchableOpacity
-           onPress={()=>navigation.navigate('Mobilelogin')}
+            style={{
+              marginTop: (mobileWidth * 5) / 100,
+              flexDirection: 'row',
+              justifyContent: 'center',
+            }}
+          >
+            <Text style={styles.mobileemailtext}>
+              {Lang_chg.Ifyoudidntcode[config.language]}
+            </Text>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => handleResend()}
+            >
+              <Text style={styles.resendtext}>
+                {Lang_chg.Resend[config.language]}
+              </Text>
+            </TouchableOpacity>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Mobilelogin')}
             activeOpacity={0.8}
             style={styles.mobileloginbutton}
           >
-            <Text style={styles.mobileemailtext}>{Lang_chg.continueMobiletxt[config.language]}</Text>
+            <Text style={styles.mobileemailtext}>
+              {Lang_chg.continueMobiletxt[config.language]}
+            </Text>
           </TouchableOpacity>
 
           <View style={styles.socialloginview}>
@@ -149,7 +162,7 @@ const [error, setError] = useState('');
               <Image
                 resizeMode="contain"
                 style={styles.googleicon}
-                source={require('../Icons/gooogle.png')}
+                source={require('../icons/gooogle.png')}
               />
             </TouchableOpacity>
             <TouchableOpacity
@@ -159,7 +172,7 @@ const [error, setError] = useState('');
               <Image
                 resizeMode="contain"
                 style={styles.googleicon}
-                source={require('../Icons/appleicon.png')}
+                source={require('../icons/appleicon.png')}
               />
             </TouchableOpacity>
           </View>
@@ -171,9 +184,13 @@ const [error, setError] = useState('');
               marginTop: (mobileWidth * 6) / 100,
             }}
           >
-            <Text style={styles.text}>{Lang_chg.dontHaveAccount[config.language]}</Text>
-             <TouchableOpacity  onPress={()=>navigation.navigate('SignUp')}>
-            <Text style={styles.signuptext}>{Lang_chg.signup[config.language]}</Text>
+            <Text style={styles.text}>
+              {Lang_chg.dontHaveAccount[config.language]}
+            </Text>
+            <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+              <Text style={styles.signuptext}>
+                {Lang_chg.signup[config.language]}
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -182,18 +199,15 @@ const [error, setError] = useState('');
   );
 };
 
-
-
-
 export default VerifyPassword;
 const styles = StyleSheet.create({
   background: {
     width: '100%',
     height: '100%',
   },
-   otp_view: {
+  otp_view: {
     width: '75%',
-    height: mobileWidth * 30 / 100,
+    height: (mobileWidth * 30) / 100,
   },
   otpInput: {
     backgroundColor: '#EFF2F1',
@@ -202,14 +216,13 @@ const styles = StyleSheet.create({
     borderColor: '#EFF2F1',
     color: '#121A23',
     fontSize: 20,
-    marginTop:mobileWidth*4/100
+    marginTop: (mobileWidth * 4) / 100,
   },
   verifyotp_text: {
-    fontSize: mobileWidth * 4 / 100,
+    fontSize: (mobileWidth * 4) / 100,
     color: Colors.whitetxt,
-  
   },
-   
+
   googleicon: {
     width: (mobileWidth * 6) / 100,
     height: (mobileWidth * 6) / 100,
@@ -260,9 +273,8 @@ const styles = StyleSheet.create({
     color: Colors.whitetxt,
     fontSize: (mobileWidth * 4.5) / 100,
     textAlign: 'center',
-    textDecorationLine:"underline",
-    left:mobileWidth*3/100
-    
+    textDecorationLine: 'underline',
+    left: (mobileWidth * 3) / 100,
   },
   vendortext: {
     color: Colors.whitetxt,
@@ -317,7 +329,7 @@ const styles = StyleSheet.create({
     borderRadius: (mobileWidth * 3) / 100,
     borderWidth: (mobileWidth * 0) / 100,
   },
- 
+
   signuptext: {
     color: Colors.whitetxt,
     textDecorationLine: 'underline',
@@ -330,8 +342,8 @@ const styles = StyleSheet.create({
     borderColor: 'red',
   },
   errorText: {
-    color:Colors.validatecolor,
-    fontSize: mobileWidth*4/100,
-    marginTop: mobileWidth*3/100,
+    color: Colors.validatecolor,
+    fontSize: (mobileWidth * 4) / 100,
+    marginTop: (mobileWidth * 3) / 100,
   },
 });

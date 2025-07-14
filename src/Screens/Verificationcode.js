@@ -10,11 +10,11 @@ import {
   Alert,StatusBar
 } from 'react-native';
 import React, { useState ,useRef } from 'react';
-import { Colors } from '../Colorfont/Color';
+import { Colors } from '../themestyle/Color';
 import { validateEmail } from '../validators';
 import OTPTextInput from 'react-native-otp-textinput';
-import { Lang_chg } from '../Language/Language_provider';
-import { config } from '../Language/configProvider';
+import { Lang_chg } from '../language/Language_provider';
+import { config } from '../language/configProvider';
 const mobileWidth = Dimensions.get('window').width;
 
 const Verificationcode = ({ route,navigation }) => {
@@ -48,7 +48,7 @@ const Verificationcode = ({ route,navigation }) => {
                     <StatusBar barStyle="light-content" hidden={false} backgroundColor={Colors.themcolortxt} />
       
       <ImageBackground
-        source={require('../Icons/splashscreen.png')}
+        source={require('../icons/splashscreen.png')}
         style={styles.background}
         resizeMode="cover"
       >

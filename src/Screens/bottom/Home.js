@@ -13,7 +13,7 @@ import React, { useState ,useEffect} from 'react';
 import Header from '../../components/Header';
 import { Dropdown } from 'react-native-element-dropdown';
 import ImagePicker from 'react-native-image-crop-picker';
-import { Colors } from '../../Colorfont/Color';
+import { Colors } from '../../themestyle/Color';
  import { AirbnbRating } from 'react-native-elements';
  import AsyncStorage from '@react-native-async-storage/async-storage';
 const mobileWidth = Dimensions.get('window').width;
@@ -21,54 +21,54 @@ const Additionalservicesdata = [
   {
     id: '1',
     work: 'Waiters',
-    image: require('../../Icons/UserCircle.png'),
+    image: require('../../icons/UserCircle.png'),
   },
   {
     id: '2',
     work: 'cleenerss/\nHouse keeping staff',
-    image: require('../../Icons/Broom.png'),
+    image: require('../../icons/Broom.png'),
   },
   {
     id: '3',
     work: 'Dishwashers',
-    image: require('../../Icons/WashingMachine.png'),
+    image: require('../../icons/WashingMachine.png'),
   },
   {
     id: '4',
     work: 'Bartenders',
-    image: require('../../Icons/BeerStein.png'),
+    image: require('../../icons/BeerStein.png'),
   },
   {
     id: '55',
     work: 'Car ',
-    image: require('../../Icons/CassetteTape.png'),
+    image: require('../../icons/CassetteTape.png'),
   },
   {
     id: '13',
     work: 'Dishwashers',
-    image: require('../../Icons/WashingMachine.png'),
+    image: require('../../icons/WashingMachine.png'),
   },
   {
     id: '14',
     work: 'Beer',
-    image: require('../../Icons/BeerStein.png'),
+    image: require('../../icons/BeerStein.png'),
   },
   {
     id: '015',
     work: 'bike',
-    image: require('../../Icons/CassetteTape.png'),
+    image: require('../../icons/CassetteTape.png'),
   },
   {
     id: '115',
     work: 'Decoration',
-    image: require('../../Icons/CassetteTape.png'),
+    image: require('../../icons/CassetteTape.png'),
   },
 ];
 const Vendordata = [
   {
     id: '1',
     family: 'Family and friends',
-    image: require('../../Icons/family.png'),
+    image: require('../../icons/family.png'),
     name:"relevant section of Cicero as printed in th in brackets were added to Lorem ipsum ",
     rating:"4.75",
     rupees:"₹649",
@@ -77,7 +77,7 @@ const Vendordata = [
   {
     id: '2',
     family: 'Party',
-    image: require('../../Icons/party.png'),
+    image: require('../../icons/party.png'),
     name:"relevant section of Cicero as printed in the sour brackets were added to Lorem ipsum ",
     rating:"4.75",
     rupees:"₹349 ",
@@ -87,7 +87,7 @@ const Vendordata = [
   {
     id: '3',
     family: 'occasions',
-    image: require('../../Icons/occasions.png'),
+    image: require('../../icons/occasions.png'),
     name:"relevant section of Cicero as printed in the low in Lorem ipsum highlighted. Letters in brackets were added to Lorem ipsum ",
     rating:"4.75",
     rupees:"₹149",
@@ -97,7 +97,7 @@ const Vendordata = [
   {
     id: '4',
     family: 'Anniversary',
-    image: require('../../Icons/Anniversary.png'),
+    image: require('../../icons/Anniversary.png'),
     name:"relevant section of Cicero as printed in the source is reproduced belod in Lorem ipsum highlighted. Letters in brackets were added to Lorem ipsum ",
     rating:"4.75",
     rupees:"₹649 ",
@@ -109,52 +109,52 @@ const Menudata = [
   {
     id: '1',
     maincourse: 'maincourse',
-    image: require('../../Icons/Plate.png'),
+    image: require('../../icons/Plate.png'),
   },
   {
     id: '2',
     maincourse: 'Starters',
-    image: require('../../Icons/staters.png'),
+    image: require('../../icons/staters.png'),
   },
   {
     id: '3',
     maincourse: 'Cakes',
-    image: require('../../Icons/cupcake.png'),
+    image: require('../../icons/cupcake.png'),
   },
   {
     id: '48',
     maincourse: 'Pasta',
-    image: require('../../Icons/staters.png'),
+    image: require('../../icons/staters.png'),
   },
   {
     id: '56',
     maincourse: 'Starters',
-    image: require('../../Icons/staters.png'),
+    image: require('../../icons/staters.png'),
   },
   {
     id: '13',
     maincourse: 'Cakes',
-    image: require('../../Icons/cupcake.png'),
+    image: require('../../icons/cupcake.png'),
   },
   {
     id: '14',
     maincourse: 'Pasta',
-    image: require('../../Icons/staters.png'),
+    image: require('../../icons/staters.png'),
   },
   {
     id: '12',
     maincourse: 'Starters',
-    image: require('../../Icons/staters.png'),
+    image: require('../../icons/staters.png'),
   },
 ];
 const Otherpartydata = [
   {
     id: '1',
-    zepimage: require('../../Icons/Zepto.png'),
+    zepimage: require('../../icons/Zepto.png'),
   },
   {
     id: '2',
-    zepimage: require('../../Icons/blinkit.png'),
+    zepimage: require('../../icons/blinkit.png'),
   },
   
   
@@ -162,8 +162,8 @@ const Otherpartydata = [
 const BookedServices = [
   {
     id: '1',
-    zepimage: require('../../Icons/ac.png'),
-    star: require('../../Icons/starrrr.png'),
+    zepimage: require('../../icons/ac.png'),
+    star: require('../../icons/starrrr.png'),
     name:"zet a-c in available",
     rating:"4.75",
     rupees:"₹649",
@@ -171,8 +171,8 @@ const BookedServices = [
   },
   {
     id: '2',
-    zepimage: require('../../Icons/cleanerr.png'),
-    star: require('../../Icons/starrrr.png'),
+    zepimage: require('../../icons/cleanerr.png'),
+    star: require('../../icons/starrrr.png'),
     name:"instense clining   ",
     rating:"4.78",
     rupees:"₹789",
@@ -180,8 +180,8 @@ const BookedServices = [
   },
   {
     id: '3',
-    zepimage: require('../../Icons/lady.png'),
-    star: require('../../Icons/starrrr.png'),
+    zepimage: require('../../icons/lady.png'),
+    star: require('../../icons/starrrr.png'),
     name:"Instense clining",
     rating:"4.71",
     rupees:"₹789",
@@ -193,13 +193,13 @@ const BookedServices = [
 const Reviews = [
   {
     id: '1',
-    boyimage: require('../../Icons/woman.png'),
+    boyimage: require('../../icons/woman.png'),
     name:"the release of Letraset sheets containing Lorem Ipsum pas sages, and more rec ently with desk shing softwa",
     rating: 4,
   },
   {
     id: '2',
-    boyimage: require('../../Icons/boy.png'),
+    boyimage: require('../../icons/boy.png'),
     name:"the release of Letras oftware like Aldus Page Maker including vers ions of Lorem Ipsum.",
      rating: 3,
   },
@@ -267,7 +267,7 @@ const Home = ({ navigation }) => {
         {
           id: 'see_all',
           work: 'See All',
-          image: require('../../Icons/righterrow.png'),
+          image: require('../../icons/righterrow.png'),
           isSeeAll: true,
         },
       ];
@@ -311,7 +311,7 @@ const Home = ({ navigation }) => {
         style={{ alignSelf: 'flex-end' }}
       >
         <Image
-          source={require('../../Icons/cross.png')}
+          source={require('../../icons/cross.png')}
           style={{
             width: mobileWidth * 0.08,
             height: mobileWidth * 0.08,
@@ -468,7 +468,7 @@ const Home = ({ navigation }) => {
                         },
                         selected ? { left: (mobileWidth * 15) / 100 } : null,
                       ]}
-                      source={require('../../Icons/down.png')}
+                      source={require('../../icons/down.png')}
                     />
                   </TouchableOpacity>
                 </TouchableOpacity>
@@ -485,7 +485,7 @@ const Home = ({ navigation }) => {
                       alignSelf: 'center',
                       left: (mobileWidth * 2) / 100,
                     }}
-                    source={require('../../Icons/errrroorw.png')}
+                    source={require('../../icons/errrroorw.png')}
                   />
                 </TouchableOpacity>
               </View>
@@ -735,8 +735,8 @@ const Home = ({ navigation }) => {
           key={i}
           source={
             i < item.rating
-              ? require('../../Icons/satrfull.png')    // Red or colored star
-              : require('../../Icons/starrrr.png')  // Gray or empty star
+              ? require('../../icons/satrfull.png')    // Red or colored star
+              : require('../../icons/starrrr.png')  // Gray or empty star
           }
           style={styles.starIcon}
         />

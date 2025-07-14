@@ -10,12 +10,12 @@ import {
   Alert,StatusBar
 } from 'react-native';
 import React, { useState, useRef } from 'react';
-import { Colors } from '../Colorfont/Color';
+import { Colors } from '../themestyle/Color';
 import PhoneInput from 'react-native-phone-number-input';
 import CountryPicker from 'react-native-country-picker-modal';
 import { Mobilenumber } from '../validators';
-import { Lang_chg } from '../Language/Language_provider';
-import { config } from '../Language/configProvider';
+import { Lang_chg } from '../language/Language_provider';
+import { config } from '../language/configProvider';
 const mobileWidth = Dimensions.get('window').width;
 
 const Mobilelogin = ({ navigation }) => {
@@ -57,7 +57,7 @@ const Mobilelogin = ({ navigation }) => {
     <StatusBar barStyle="light-content" hidden={false} backgroundColor={Colors.themcolortxt} />
       
       <ImageBackground
-        source={require('../Icons/splashscreen.png')}
+        source={require('../icons/splashscreen.png')}
         style={styles.background}
         resizeMode="cover"
       >

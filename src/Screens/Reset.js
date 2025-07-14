@@ -10,14 +10,14 @@ import {
   Alert,StatusBar
 } from 'react-native';
 import React, { useState } from 'react';
-import { Colors } from '../Colorfont/Color';
+import { Colors } from '../themestyle/Color';
 import {
   validateEmail,
   validatePassword,
   confirmPassword,
 } from '../validators';
-import { Lang_chg } from '../Language/Language_provider';
-import { config } from '../Language/configProvider';
+import { Lang_chg } from '../language/Language_provider';
+import { config } from '../language/configProvider';
 const mobileWidth = Dimensions.get('window').width;
 
 const Reset = ({ navigation }) => {
@@ -62,7 +62,7 @@ const Reset = ({ navigation }) => {
               <StatusBar barStyle="light-content" hidden={false} backgroundColor={Colors.statusbar} />
       
       <ImageBackground
-        source={require('../Icons/splashscreen.png')}
+        source={require('../icons/splashscreen.png')}
         style={styles.background}
         resizeMode="cover"
       >
@@ -168,8 +168,8 @@ const Reset = ({ navigation }) => {
               <Image
                 source={
                   secureText
-                    ? require('../Icons/EyeSlash.png')
-                    : require('../Icons/Eye.png')
+                    ? require('../icons/EyeSlash.png')
+                    : require('../icons/Eye.png')
                 }
                 resizeMode="contain"
                 style={{
@@ -207,7 +207,7 @@ const Reset = ({ navigation }) => {
               <Image
                 resizeMode="contain"
                 style={styles.googleicon}
-                source={require('../Icons/gooogle.png')}
+                source={require('../icons/gooogle.png')}
               />
             </TouchableOpacity>
             <TouchableOpacity
@@ -217,7 +217,7 @@ const Reset = ({ navigation }) => {
               <Image
                 resizeMode="contain"
                 style={styles.googleicon}
-                source={require('../Icons/appleicon.png')}
+                source={require('../icons/appleicon.png')}
               />
             </TouchableOpacity>
           </View>
