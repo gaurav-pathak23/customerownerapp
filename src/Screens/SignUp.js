@@ -221,7 +221,7 @@ const SignUp = ({ navigation, route }) => {
     const picker =
       source === 'camera'
         ? ImagePicker.openCamera(options)
-        : ImagePicker.openPicker(options); // gallery
+        : ImagePicker.openPicker(options); 
 
     picker
       .then(image => {
