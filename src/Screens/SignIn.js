@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
   TextInput,
   Alert,
+  StatusBar,
+  ScrollView,
 } from 'react-native';
 import React, { useState ,useEffect} from 'react';
 import { Colors } from '../Colorfont/Color';
@@ -109,7 +111,8 @@ const validateForm = async () => {
         style={styles.background}
         resizeMode="cover"
       >
-        
+        <ScrollView>
+         <StatusBar barStyle="light-content" hidden={false} backgroundColor={Colors.layercolor} />
 <Text style={styles.signintext}>{Lang_chg.signin[config.language]}</Text>
       
         
@@ -239,7 +242,7 @@ const validateForm = async () => {
             activeOpacity={0.8}
             onPress={() => navigation.navigate('ForgotPassword')}
           >
-            <Text style={styles.forgotpasswordtext}>{Lang_chg.forgotPassword[config.language]}</Text>
+            <Text style={[styles.forgotpasswordtext]}>{Lang_chg.forgotPassword[config.language]}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -291,6 +294,7 @@ const validateForm = async () => {
             </TouchableOpacity>
           </View>
         </View>
+        </ScrollView>
       </ImageBackground>
     </View>
   );
@@ -410,8 +414,8 @@ const styles = StyleSheet.create({
     color: Colors.whitetxt,
     textDecorationLine: 'underline',
     fontSize: (mobileWidth * 3.5) / 100,
-    left: (mobileWidth * 58) / 100,
      marginTop: (mobileWidth * 5) / 100,
+     textAlign :"right"
   },
   signuptext: {
     color: Colors.whitetxt,

@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
   TextInput,
   Alert,
+  StatusBar,
+  ScrollView,
 } from 'react-native';
 import React, { useState, useRef } from 'react';
 import { Colors } from '../Colorfont/Color';
@@ -57,6 +59,8 @@ const Mobilelogin = ({ navigation }) => {
         style={styles.background}
         resizeMode="cover"
       >
+        <ScrollView>
+         <StatusBar barStyle="light-content" hidden={false} backgroundColor={Colors.layercolor} />
         <Text style={styles.signintext}>Sign In & Sign Up</Text>
         <Text style={styles.text}>Enter your details below </Text>
         <View style={{ padding: (mobileWidth * 7.2) / 100 }}>
@@ -147,6 +151,7 @@ const Mobilelogin = ({ navigation }) => {
             <Text style={styles.mobileemailtext}>Sign In / Sign Up</Text>
           </TouchableOpacity>
         </View>
+        </ScrollView>
       </ImageBackground>
     </View>
   );

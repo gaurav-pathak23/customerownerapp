@@ -46,7 +46,7 @@ function DrawerNavigator({ navigation }) {
     // ---------------------------------
     return (
             <Stack.Navigator
-            initialRouteName={'Splash'}>
+            initialRouteName={'Language'}>
                         {/* screenOptions={{ cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }}> */}
              
             <Stack.Screen name="CustomDrawer" component={CustomDrawer} options={{ headerShown: false, gestureEnabled: false }} />

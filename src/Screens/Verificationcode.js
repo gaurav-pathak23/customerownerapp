@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   TextInput,
   Alert,
+  StatusBar,
 } from 'react-native';
 import React, { useState ,useRef } from 'react';
 import { Colors } from '../Colorfont/Color';
@@ -48,6 +49,7 @@ const Verificationcode = ({ route,navigation }) => {
         style={styles.background}
         resizeMode="cover"
       >
+         <StatusBar barStyle="light-content" hidden={false} backgroundColor={Colors.layercolor} />
 
         <Text style={styles.codetxt}>Enter verification code</Text>
         <Text style={styles.text}>We have send you a 4 digit code on</Text>

@@ -9,6 +9,8 @@ import {
   TouchableOpacity,
   TextInput,
   Alert,
+  StatusBar,
+  ScrollView,
 } from 'react-native';
 import React, { useState ,useEffect } from 'react';
 import { Colors } from '../Colorfont/Color';
@@ -106,6 +108,8 @@ const validateForm = async () => {
         style={styles.background}
         resizeMode="cover"
       >
+        <ScrollView>
+         <StatusBar barStyle="light-content" hidden={false} backgroundColor={Colors.layercolor} />
         <Text style={styles.signintext}>Sign In</Text>
         <Text style={styles.text}>Enter your details below & Login</Text>
         <View style={{ padding: (mobileWidth * 7.2) / 100 }}>
@@ -230,6 +234,7 @@ const validateForm = async () => {
             </TouchableOpacity>
           </View>
         </View>
+        </ScrollView>
       </ImageBackground>
     </View>
   );

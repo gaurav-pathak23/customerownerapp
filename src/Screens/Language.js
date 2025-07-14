@@ -1,4 +1,4 @@
-import { View, Text ,StyleSheet ,Dimensions ,Image ,ImageBackground, TouchableOpacity} from 'react-native'
+import { View, Text ,StyleSheet ,Dimensions ,Image ,ImageBackground, TouchableOpacity, StatusBar} from 'react-native'
 import React ,{useState}from 'react'
 import { Colors, Font } from '../Colorfont/Color';
 import { Dropdown } from 'react-native-element-dropdown';
@@ -45,6 +45,7 @@ const [isFocus, setIsFocus] = useState(false);
             style={styles.background}
             resizeMode="cover"
           >
+             <StatusBar barStyle="light-content" hidden={false} backgroundColor={Colors.layercolor} />
             <Image
               resizeMode="contain"
               style={styles.image}
