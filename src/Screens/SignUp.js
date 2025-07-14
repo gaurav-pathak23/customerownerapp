@@ -390,8 +390,8 @@ const SignUp = ({ navigation, route }) => {
 
 
   const [date, setDate] = useState(new Date(2000, 0, 1)); // default DOB
-  console.log(date, "date.....date");
-
+  console.log(date, "date..date...date");
+  
   const [show, setShow] = useState(false);
   const [dob, setDob] = useState('');
   console.log(dob, "dob...........");
