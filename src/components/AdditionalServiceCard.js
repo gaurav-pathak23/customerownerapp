@@ -1,6 +1,6 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
-import { Colors } from '../Colorfont/Color'
+import { Colors } from '../themestyle/Color'
 
 export default function AdditionalServiceCard({ title, price, source }) {
     const [count, setCount] = useState(1)
@@ -15,11 +15,11 @@ export default function AdditionalServiceCard({ title, price, source }) {
             </View>
             <View style={styles.countContainer}>
                 <TouchableOpacity disabled={count==1} activeOpacity={0.9} onPress={()=>setCount(count-1)}>
-                    <Image source={require("../Icons/Minus.png")} />
+                    <Image source={require("../icons/Minus.png")} />
                 </TouchableOpacity>
                 <Text style={styles.count}>{count} </Text>
                 <TouchableOpacity activeOpacity={0.9} onPress={()=>setCount(count+1)}>
-                    <Image source={require("../Icons/Plus.png")} />
+                    <Image source={require("../icons/Plus.png")} />
                 </TouchableOpacity>
             </View>
         </View>

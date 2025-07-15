@@ -14,7 +14,7 @@
 //         </View>
 //         <Text style={styles.menuItemText}>{title}</Text>
 //       </View>
-//       <Image source={require("../../Icons/righterrow.png")} />
+//       <Image source={require("../../icons/righterrow.png")} />
 //     </TouchableOpacity>
 //   )
 // }
@@ -26,12 +26,12 @@
 //     profileImage: 'https://placehold.co/100x100/E0E0E0/333333?text=Profile',
 //   };
 //   const menuItems = [
-//     { id: '1', title: 'Manage Address', icon: require("../../Icons/locationindicator.png") },
-//     { id: '2', title: 'My Payments', icon: require("../../Icons/wallet.png") },
-//     { id: '3', title: 'Refer & Earn', icon: require("../../Icons/share.png") },
-//     { id: '4', title: 'Rate Us', icon: require("../../Icons/star.png") },
-//     { id: '5', title: 'About HaathSaath', icon: require("../../Icons/logoicon.png") },
-//     { id: '6', title: 'Logout', icon: require("../../Icons/logout.png") },
+//     { id: '1', title: 'Manage Address', icon: require("../../icons/locationindicator.png") },
+//     { id: '2', title: 'My Payments', icon: require("../../icons/wallet.png") },
+//     { id: '3', title: 'Refer & Earn', icon: require("../../icons/share.png") },
+//     { id: '4', title: 'Rate Us', icon: require("../../icons/star.png") },
+//     { id: '5', title: 'About HaathSaath', icon: require("../../icons/logoicon.png") },
+//     { id: '6', title: 'Logout', icon: require("../../icons/logout.png") },
 //   ];
 //   return (
 //     <View style={styles.container}>
@@ -42,14 +42,14 @@
 //         <View >
 //           <Image
 //             style={styles.profileImage}
-//             source={require("../../Icons/profilepic.png")} />
+//             source={require("../../icons/profilepic.png")} />
 //         </View>
 //         <View style={styles.profileTextContainer}>
 //           <Text style={styles.profileName}>{profileData.name}</Text>
 //           <Text style={styles.profilePhone}>{profileData.phoneNumber}</Text>
 //         </View>
 //         <TouchableOpacity activeOpacity={0.9} style={styles.editButton}>
-//           <Image source={require("../../Icons/edit.png")} />
+//           <Image source={require("../../icons/edit.png")} />
 //         </TouchableOpacity>
 //       </View>
 //       <View style={styles.menuContainer}>

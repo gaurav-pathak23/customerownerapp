@@ -6,10 +6,9 @@ import Booking from './Booking';
 import Profile from './Profile';
 import Chef from './Chef';
 import Otherparty from './Otherparty';
-// import { Colors } from '../../Colorfont/Color';
-import { Colors } from '../../Colorfont/Color';
+import { Colors } from '../../themestyle/Color';
 import Mobilelogin from '../Mobilelogin';
-import HomeStack from './Homestack';
+import HomeStack from './HomeStack';
 const mobileWidth = Dimensions.get('window').width;
 const Bottom = createBottomTabNavigator();
 
@@ -18,18 +17,14 @@ const BottomNavigator = () => {
     <Bottom.Navigator
       screenOptions={{
         tabBarStyle: {
-          height:100,
+          height: 100,
           position: 'absolute',
           bottom: 0,
           left: 0,
           right: 0,
           paddingBottom: 8,
-          backgroundColor:Colors.bottomcardColor,
-        
-        
-         },
-        // tabBarActiveBackgroundColor: 'red',
-        // tabBarInactiveBackgroundColor: 'black',
+          backgroundColor: Colors.bottomcardColor,
+        },
       }}
     >
       <Bottom.Screen
@@ -37,23 +32,34 @@ const BottomNavigator = () => {
         component={HomeStack}
         options={{
           headerShown: false,
-            
+
           tabBarIcon: ({ focused }) => (
             <View style={styles.iconContainer}>
               <Image
-                source={require('../../Icons/HouseLine.png')}
-                style={[styles.icon, { tintColor: focused ? Colors.whitetxt: Colors.placeholdertxtcolor}]}
+                source={require('../../icons/HouseLine.png')}
+                style={[
+                  styles.icon,
+                  {
+                    tintColor: focused
+                      ? Colors.whitetxt
+                      : Colors.placeholdertxtcolor,
+                  },
+                ]}
               />
-              
             </View>
           ),
-          
+
           tabBarLabel: ({ focused }) => (
-            <Text style={{ color: focused ? Colors.whitetxt: Colors.placeholdertxtcolor, fontSize:mobileWidth*3/100,marginTop:mobileWidth*5/100  }}>
+            <Text
+              style={{
+                color: focused ? Colors.whitetxt : Colors.placeholdertxtcolor,
+                fontSize: (mobileWidth * 3) / 100,
+                marginTop: (mobileWidth * 5) / 100,
+              }}
+            >
               Home
             </Text>
           ),
-          
         }}
       />
 
@@ -62,20 +68,30 @@ const BottomNavigator = () => {
         component={Chef}
         options={{
           headerShown: false,
-           
-           
+
           tabBarIcon: ({ focused }) => (
             <View style={styles.iconContainer}>
               <Image
-                source={require('../../Icons/ChefHat.png')}
-                style={[styles.icon, { tintColor: focused ? Colors.whitetxt: Colors.placeholdertxtcolor,}]}
+                source={require('../../icons/ChefHat.png')}
+                style={[
+                  styles.icon,
+                  {
+                    tintColor: focused
+                      ? Colors.whitetxt
+                      : Colors.placeholdertxtcolor,
+                  },
+                ]}
               />
-             
             </View>
           ),
-           tabBarLabel: ({ focused }) => (
-            <Text style={{ color: focused ?  Colors.whitetxt: Colors.placeholdertxtcolor,
-             fontSize:mobileWidth*3.5/100,marginTop:mobileWidth*5/100 }}>
+          tabBarLabel: ({ focused }) => (
+            <Text
+              style={{
+                color: focused ? Colors.whitetxt : Colors.placeholdertxtcolor,
+                fontSize: (mobileWidth * 3.5) / 100,
+                marginTop: (mobileWidth * 5) / 100,
+              }}
+            >
               Chefs
             </Text>
           ),
@@ -85,27 +101,36 @@ const BottomNavigator = () => {
       <Bottom.Screen
         name="Booking"
         component={Booking}
-        
         options={{
           headerShown: false,
-           
-           
+
           tabBarIcon: ({ focused }) => (
             <View style={styles.iconContainer}>
               <Image
-                source={require('../../Icons/FileText.png')}
-                style={[styles.icon, { tintColor:  focused ? Colors.whitetxt: Colors.placeholdertxtcolor }]}
+                source={require('../../icons/FileText.png')}
+                style={[
+                  styles.icon,
+                  {
+                    tintColor: focused
+                      ? Colors.whitetxt
+                      : Colors.placeholdertxtcolor,
+                  },
+                ]}
               />
-               
             </View>
           ),
-           tabBarLabel: ({ focused }) => (
-            <Text style={{ color:  focused ? Colors.whitetxt: Colors.placeholdertxtcolor, fontSize:mobileWidth*3/100,marginTop:mobileWidth*5/100  }}>
+          tabBarLabel: ({ focused }) => (
+            <Text
+              style={{
+                color: focused ? Colors.whitetxt : Colors.placeholdertxtcolor,
+                fontSize: (mobileWidth * 3) / 100,
+                marginTop: (mobileWidth * 5) / 100,
+              }}
+            >
               Bookings
             </Text>
           ),
         }}
-        
       />
 
       <Bottom.Screen
@@ -116,43 +141,65 @@ const BottomNavigator = () => {
           tabBarIcon: ({ focused }) => (
             <View style={styles.iconContainer}>
               <Image
-                source={require('../../Icons/CookingPot.png')}
-                style={[styles.icon, { tintColor: focused ? Colors.whitetxt: Colors.placeholdertxtcolor }]}
+                source={require('../../icons/CookingPot.png')}
+                style={[
+                  styles.icon,
+                  {
+                    tintColor: focused
+                      ? Colors.whitetxt
+                      : Colors.placeholdertxtcolor,
+                  },
+                ]}
               />
-              
             </View>
           ),
-           tabBarLabel: ({ focused }) => (
-            <Text style={{ color: focused ? Colors.whitetxt: Colors.placeholdertxtcolor, fontSize:mobileWidth*3/100,marginTop:mobileWidth*5/100 }}>
+          tabBarLabel: ({ focused }) => (
+            <Text
+              style={{
+                color: focused ? Colors.whitetxt : Colors.placeholdertxtcolor,
+                fontSize: (mobileWidth * 3) / 100,
+                marginTop: (mobileWidth * 5) / 100,
+              }}
+            >
               Other Party
             </Text>
           ),
         }}
       />
-
-       <Bottom.Screen
+      <Bottom.Screen
         name="Profile"
         component={Profile}
         options={{
           headerShown: false,
-          
+
           tabBarIcon: ({ focused }) => (
             <View style={styles.iconContainer}>
               <Image
-                source={require('../../Icons/UserCircle.png')}
-                style={[styles.icon, { tintColor:  focused ? Colors.whitetxt: Colors.placeholdertxtcolor }]}
+                source={require('../../icons/UserCircle.png')}
+                style={[
+                  styles.icon,
+                  {
+                    tintColor: focused
+                      ? Colors.whitetxt
+                      : Colors.placeholdertxtcolor,
+                  },
+                ]}
               />
-              
-              
             </View>
           ),
-           tabBarLabel: ({ focused }) => (
-            <Text style={{ color:  focused ? Colors.whitetxt: Colors.placeholdertxtcolor, fontSize:mobileWidth*3/100,marginTop:mobileWidth*5/100  }}>
+          tabBarLabel: ({ focused }) => (
+            <Text
+              style={{
+                color: focused ? Colors.whitetxt : Colors.placeholdertxtcolor,
+                fontSize: (mobileWidth * 3) / 100,
+                marginTop: (mobileWidth * 5) / 100,
+              }}
+            >
               Profile
             </Text>
           ),
         }}
-      /> 
+      />
     </Bottom.Navigator>
   );
 };
@@ -162,11 +209,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   icon: {
-    width: mobileWidth * 8/ 100,
-    height: mobileWidth * 8 / 100,
-    marginTop:mobileWidth*3/100
+    width: (mobileWidth * 8) / 100,
+    height: (mobileWidth * 8) / 100,
+    marginTop: (mobileWidth * 3) / 100,
   },
-  
 });
 
 export default BottomNavigator;

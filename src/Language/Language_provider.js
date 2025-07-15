@@ -30,7 +30,7 @@ EnterPasswordtxt = ['Enter Password', 'पासवर्ड दर्ज कर
   accountNotFound=['No account found Please Sign Up', 'कोई खाता नहीं मिला। कृपया साइन अप करें।'];
   no_account_found = ['No account found  Please Sign Up.', 'कोई खाता नहीं मिला। कृपया साइन अप करें।'];
 email_mismatch = ['Email does not match.', 'ईमेल मेल नहीं खाता।'];
-incorrect_password = ['Incorrect password.', 'गलत पासवर्ड।'];
+incorrect_password = ['Incorrect password.', 'पासवर्ड मेल नहीं खाता'];
 incorrect_password_ = ['Incorrect password.', 'पासवर्ड मेल नहीं खाता'];
 // forgot password screen
 back_to_login = ['Back to login', 'लॉगिन पर वापस जाएं'];
@@ -130,6 +130,7 @@ error_confirmPassword = ['Please confirm the password', 'कृपया पा�
 error_passwordMismatch = ['Passwords do not match', 'पासवर्ड मेल नहीं खा रहे हैं'];
 error_enterMobile = ['Please enter a mobile number', 'कृपया मोबाइल नंबर दर्ज करें'];
 error_validMobile = ['Please enter a valid 10-digit mobile number', 'कृपया मान्य 10-अंकीय मोबाइल नंबर दर्ज करें'];
+error_login = [ 'An error occurred during login','लॉगिन के दौरान एक त्रुटि हुई']
   //  Abhishek
 
 

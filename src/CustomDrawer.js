@@ -28,7 +28,7 @@ const CustomDrawer = ({ navigation, props }) => {
             <Image
               resizeMode="contain"
               style={styles.Drawer_img}
-              source={require('../src/Icons/AppleLogo.png')}
+              source={require('../src/icons/AppleLogo.png')}
             ></Image>
             <Text style={styles.drawer_txt}>HomeTxt</Text>
           </View>
@@ -43,7 +43,7 @@ const CustomDrawer = ({ navigation, props }) => {
             <Image
               resizeMode="contain"
               style={styles.Drawer_img}
-              source={require('../src/Icons/AppleLogo.png')}
+              source={require('../src/icons/AppleLogo.png')}
             ></Image>
             <Text style={styles.drawer_txt}>HomeTxt</Text>
           </View>
@@ -58,7 +58,7 @@ const CustomDrawer = ({ navigation, props }) => {
             <Image
               resizeMode="contain"
               style={styles.Drawer_img}
-              source={require('../src/Icons/AppleLogo.png')}
+              source={require('../src/icons/AppleLogo.png')}
             ></Image>
             <Text style={styles.drawer_txt}>HomeTxt</Text>
           </View>

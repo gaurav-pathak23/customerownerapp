@@ -11,17 +11,18 @@ import {
   Dimensions,
   Image,
   Modal,
-  Platform, StatusBar
+  Platform,
+  StatusBar,
 } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import { Dropdown } from 'react-native-element-dropdown';
 import ImagePicker from 'react-native-image-crop-picker';
-import { Colors } from '../Colorfont/Color';
+import { Colors } from '../themestyle/Color';
 import { Marker } from 'react-native-maps';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Lang_chg } from '../Language/Language_provider';
-import { config } from '../Language/configProvider';
+import { Lang_chg } from '../language/Language_provider';
+import { config } from '../language/configProvider';
 import {
   validateEmail,
   validatePassword,
@@ -31,7 +32,10 @@ import {
   validateGender,
   validatePincode,
   validateName,
-  Mobilenumber, validateImage, validateAadhar, validatedob
+  Mobilenumber,
+  validateImage,
+  validateAadhar,
+  validatedob,
 } from '../validators';
 
 const mobileWidth = Dimensions.get('window').width;
@@ -48,7 +52,6 @@ const businessOptions = [
   { label: 'Inventory Management', value: 'Inventory Management' },
   { label: 'Mobile App Usage  ', value: 'Mobile App Usage ' },
   { label: 'Payment Handling', value: 'Payment Handling' },
-
 ];
 const skillsdata = [
   { label: 'Business Strategy ', value: 'Business Strategy' },
@@ -56,7 +59,6 @@ const skillsdata = [
   { label: 'Data Analysis', value: 'Data Analysis' },
   { label: 'Team Lead ', value: 'Team Lead' },
   { label: 'Legal & Compliance', value: 'Legal & Compliance' },
-
 ];
 
 const cityStateData = {
@@ -74,20 +76,27 @@ const cityStateData = {
   Dhar: { state: 'Madhya Pradesh', pincode: '454001' },
   Ratlam: { state: 'Madhya Pradesh', pincode: '457001' },
   Ujjain: { state: 'Madhya Pradesh', pincode: '456001' },
-  "Vijay Nagar": { pincode: "452010", city: "Indore", state: "Madhya Pradesh" },
-  "Palasia": { pincode: "452001", city: "Indore", state: "Madhya Pradesh" },
-  "Rajwada": { pincode: "452002", city: "Indore", state: "Madhya Pradesh" },
-  "Bhawarkua": { pincode: "452001", city: "Indore", state: "Madhya Pradesh" },
-  "Scheme No. 54": { pincode: "452010", city: "Indore", state: "Madhya Pradesh" },
-  "MR-10 Road": { pincode: "452010", city: "Indore", state: "Madhya Pradesh" },
-  "Sudama Nagar": { pincode: "452009", city: "Indore", state: "Madhya Pradesh" },
-  "Annapurna": { pincode: "452009", city: "Indore", state: "Madhya Pradesh" },
-  "LIG Colony": { pincode: "452008", city: "Indore", state: "Madhya Pradesh" },
-  "AB Road": { pincode: "452010", city: "Indore", state: "Madhya Pradesh" },
-  "Khajrana": { pincode: "452016", city: "Indore", state: "Madhya Pradesh" },
-  "Mhow": { pincode: "453441", city: "Indore", state: "Madhya Pradesh" },
+  'Vijay Nagar': { pincode: '452010', city: 'Indore', state: 'Madhya Pradesh' },
+  Palasia: { pincode: '452001', city: 'Indore', state: 'Madhya Pradesh' },
+  Rajwada: { pincode: '452002', city: 'Indore', state: 'Madhya Pradesh' },
+  Bhawarkua: { pincode: '452001', city: 'Indore', state: 'Madhya Pradesh' },
+  'Scheme No. 54': {
+    pincode: '452010',
+    city: 'Indore',
+    state: 'Madhya Pradesh',
+  },
+  'MR-10 Road': { pincode: '452010', city: 'Indore', state: 'Madhya Pradesh' },
+  'Sudama Nagar': {
+    pincode: '452009',
+    city: 'Indore',
+    state: 'Madhya Pradesh',
+  },
+  Annapurna: { pincode: '452009', city: 'Indore', state: 'Madhya Pradesh' },
+  'LIG Colony': { pincode: '452008', city: 'Indore', state: 'Madhya Pradesh' },
+  'AB Road': { pincode: '452010', city: 'Indore', state: 'Madhya Pradesh' },
+  Khajrana: { pincode: '452016', city: 'Indore', state: 'Madhya Pradesh' },
+  Mhow: { pincode: '453441', city: 'Indore', state: 'Madhya Pradesh' },
 };
-
 
 const pincodeCountryData = {
   400001: 'India',
@@ -104,18 +113,17 @@ const pincodeCountryData = {
   454001: 'India', // Dhar
   457001: 'India', // Ratlam
   456001: 'India', // Ujjain
-  452009: "India",
-  453441: "India",
-  452016: "India",
-  452010: "India",
-  452002: "India",
-  452008: "India"
+  452009: 'India',
+  453441: 'India',
+  452016: 'India',
+  452010: 'India',
+  452002: 'India',
+  452008: 'India',
 };
-
 
 const SignUp = ({ navigation, route }) => {
   const { latitude, longitude } = route.params || {};
-  console.log(latitude, longitude, "latitude, longitude sign up screen.....");
+  console.log(latitude, longitude, 'latitude, longitude sign up screen.....');
   // setlong(longitude)
   // setlat(latitude)
   const [long, setlong] = useState(latitude ?? fallbackLat);
@@ -131,7 +139,7 @@ const SignUp = ({ navigation, route }) => {
           latitudeDelta: 0.005,
           longitudeDelta: 0.005,
         },
-        1000
+        1000,
       );
     }
   }, [lat, long]);
@@ -154,7 +162,7 @@ const SignUp = ({ navigation, route }) => {
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [pincode, setPincode] = useState('');
-  console.log(pincode, "...........pincode");
+  console.log(pincode, '...........pincode');
   const [country, setCountry] = useState('');
   const [tab, settab] = useState('Current');
   const [errors, setErrors] = useState({
@@ -170,13 +178,13 @@ const SignUp = ({ navigation, route }) => {
     pincode: '',
     image: '',
     Aadhar: '',
-    dob: ''
+    dob: '',
   });
-  console.log(errors, "errors................");
+  console.log(errors, 'errors................');
 
   const handleImagePick = (
     source = 'camera',
-    cropping = true,
+    cropping = false,
     mediaType = 'photo',
   ) => {
     const options = {
@@ -221,7 +229,7 @@ const SignUp = ({ navigation, route }) => {
     const picker =
       source === 'camera'
         ? ImagePicker.openCamera(options)
-        : ImagePicker.openPicker(options); 
+        : ImagePicker.openPicker(options);
 
     picker
       .then(image => {
@@ -265,14 +273,10 @@ const SignUp = ({ navigation, route }) => {
     }
   };
 
-
   // first function
 
   const validateForm = async () => {
     const newErrors = {};
-    //     const imageError = validateImage(imagePath);
-    // if (imageError) return setErrors({ ...newErrors, image: imageError });
-    // ============= for image hide some specific resion
     const nameError = validateName(name);
     if (nameError) return setErrors({ ...newErrors, name: nameError });
     const emailError = validateEmail(email);
@@ -289,16 +293,14 @@ const SignUp = ({ navigation, route }) => {
     }
 
     const dobError = validatedob(dob);
-    console.log(dobError, "......dobError");
+    console.log(dobError, '......dobError');
 
-    if (dobError)
-      return setErrors({ ...newErrors, dob: dobError });
+    if (dobError) return setErrors({ ...newErrors, dob: dobError });
 
     const AadharError = validateAadhar(Aadhar);
-    console.log(AadharError, "AadharError........AadharError");
+    console.log(AadharError, 'AadharError........AadharError');
 
-    if (AadharError)
-      return setErrors({ ...newErrors, Aadhar: AadharError });
+    if (AadharError) return setErrors({ ...newErrors, Aadhar: AadharError });
     const passwordError = validatePassword(password);
     if (passwordError)
       return setErrors({ ...newErrors, password: passwordError });
@@ -318,31 +320,7 @@ const SignUp = ({ navigation, route }) => {
     const cityError = validateCity(city);
     if (cityError) return setErrors({ ...newErrors, city: cityError });
 
-
-
     setErrors({});
-
-    // const userData = {
-    //   Aadhar,
-    //   name,
-    //   email,
-    //   mobile,
-    //   gender,
-    //   business,
-    //   address,
-    //   city,
-    //   state,
-    //   country,
-    //   pincode,
-    //   password,
-    //   dob,
-    //   // imagePath,
-    //   // proofimagepath,
-    //   latitude: lat,
-    //   longitude: long,
-
-    // };
-
 
     const userData = {
       Aadhar,
@@ -375,26 +353,21 @@ const SignUp = ({ navigation, route }) => {
 
       Alert.alert(Lang_chg.Registration[config.language]);
       navigation.navigate('Home');
-
     } catch (error) {
       console.log('Error saving data:', error);
-
     }
   };
 
-
-  // it's a manualy provide.. lat long 
+  // it's a manualy provide.. lat long
   const fallbackLat = 22.7552;
   const fallbackLong = 75.8968;
 
-
-
   const [date, setDate] = useState(new Date(2000, 0, 1)); // default DOB
-  console.log(date, "date..date...date");
-  
+  console.log(date, 'date..date...date');
+
   const [show, setShow] = useState(false);
   const [dob, setDob] = useState('');
-  console.log(dob, "dob...........");
+  console.log(dob, 'dob...........');
   const onChange = (event, selectedDate) => {
     setShow(Platform.OS === 'ios'); // iOS keeps picker open
     if (selectedDate) {
@@ -403,57 +376,18 @@ const SignUp = ({ navigation, route }) => {
     }
   };
 
-
-  //   const handlePincodeChange = (text) => {
-  //   setPincode(text);
-  //   const foundCity = Object.entries(cityStateData).find(
-  //     ([, val]) => val.pincode === text
-  //   );
-
-  //   if (foundCity) {
-  //     setCity(foundCity[0]);
-  //     setState(foundCity[1].state);
-  //     setCountry(pincodeCountryData[text] || '');
-  //     setIsPincodeValid(true);
-  //   } else {
-  //     setCity('');
-  //     setState('');
-  //     setCountry('');
-  //     setIsPincodeValid(false);
-  //   }
-  // };
-  // const handlePincodeChange = (text) => {
-  //   setPincode(text);
-  //   const foundCity = Object.entries(cityStateData).find(
-  //     ([, val]) => val.pincode === text
-  //   );
-
-  //   if (foundCity) {
-  //     setCity(foundCity[0]);
-  //     setState(foundCity[1].state);
-  //     setCountry(pincodeCountryData[text] || '');
-  //     setIsPincodeValid(true);
-  //     setErrors(prev => ({ ...prev, pincode: '' })); // clear error if valid
-  //   } else {
-  //     setCity('');
-  //     setState('');
-  //     setCountry('');
-  //     setIsPincodeValid(false);
-  //     setErrors(prev => ({
-  //       ...prev,
-  //       pincode: 'Pincode not available'
-  //       // pincode: Lang_chg.PincodeNotAvailable[config.language] || 'Pincode not available'
-  //     }));
-  //   }
-  // };
   const [isPincodeValid, setIsPincodeValid] = useState(false);
 
   return (
     <View style={{ flex: 1 }}>
-      <StatusBar barStyle="light-content" hidden={false} backgroundColor={Colors.statusbar} />
+      <StatusBar
+        barStyle="light-content"
+        hidden={false}
+        backgroundColor={Colors.statusbar}
+      />
 
       <ImageBackground
-        source={require('../Icons/splashscreen.png')}
+        source={require('../icons/splashscreen.png')}
         style={styles.background}
         resizeMode="cover"
       >
@@ -478,7 +412,7 @@ const SignUp = ({ navigation, route }) => {
                   <Image
                     style={styles.cameraicon}
                     resizeMode="contain"
-                    source={require('../Icons/camera.png')}
+                    source={require('../icons/camera.png')}
                   />
                 </TouchableOpacity>
                 <View style={styles.verticalLine} />
@@ -490,7 +424,7 @@ const SignUp = ({ navigation, route }) => {
                   <Image
                     style={styles.cameraicon}
                     resizeMode="contain"
-                    source={require('../Icons/Galleryimage.png')}
+                    source={require('../icons/Galleryimage.png')}
                   />
                 </TouchableOpacity>
               </View>
@@ -523,70 +457,19 @@ const SignUp = ({ navigation, route }) => {
             </View>
           </View>
         </Modal>
-        {/* proof modal */}
-        {/* <Modal
-          animationType="slide"
-          transparent={true}
-          visible={proofmodal}
-          onRequestClose={() => {
-            setproofmodal(!proofmodal);
-          }}
-        >
-          <View style={{ color: '#00000090' }}>
-            <View style={styles.CardView}>
-              <View
-                style={{ flexDirection: 'row', justifyContent: 'space-around' }}
-              >
-                <TouchableOpacity
-                  onPress={() => {
-                    proofImagePick('camera'), setproofmodal(!proofmodal);
-                  }}
-                >
-                  <Image
-                    style={styles.cameraicon}
-                    resizeMode="contain"
-                    source={require('../Icons/camera.png')}
-                  />
-                </TouchableOpacity>
-                <View style={styles.verticalLine} />
-                <TouchableOpacity
-                  onPress={() => {
-                    proofImagePick('gallery'), setproofmodal(!proofmodal);
-                  }}
-                >
-                  <Image
-                    style={styles.cameraicon}
-                    resizeMode="contain"
-                    source={require('../Icons/Galleryimage.png')}
-                  />
-                </TouchableOpacity>
-              </View>
-              <TouchableOpacity
-                style={styles.cancelbutton}
-                onPress={() => setproofmodal(!proofmodal)}
-              >
-                <Text
-                  style={[
-                    styles.Canceltxt,
-                    {
-                      color: Colors.tabcolor,
-                      marginTop: (mobileWidth * -1) / 100,
-                    },
-                  ]}
-                >
-                  Cancle
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </Modal> */}
+
         <ScrollView
           contentContainerStyle={{ paddingBottom: 100 }}
           keyboardShouldPersistTaps="handled"
           showsVerticalScrollIndicator={false}
         >
-          <Text style={styles.signintext}>{Lang_chg.signup[config.language]}</Text>
-          <Text style={styles.textt}> {Lang_chg.enterDetailsBelow[config.language]}</Text>
+          <Text style={styles.signintext}>
+            {Lang_chg.signup[config.language]}
+          </Text>
+          <Text style={styles.textt}>
+            {' '}
+            {Lang_chg.enterDetailsBelow[config.language]}
+          </Text>
           <View style={{ padding: (mobileWidth * 7.2) / 100 }}>
             <View style={styles.tabview}>
               <TouchableOpacity
@@ -649,13 +532,16 @@ const SignUp = ({ navigation, route }) => {
               {Lang_chg.UploadPhoto[config.language]}
             </Text>
           </TouchableOpacity>
-          {/* {errors.image ? (
-  <Text style={[styles.errorText,{textAlign:"center",right:mobileWidth*-1/100}]}>{errors.image}</Text>
-) : null} */}
-          {/* image error  */}
-          {/* Input Fields */}
-          <View style={{ justifyContent: 'center', paddingLeft: mobileWidth * 5 / 100 }}>
-            <Text style={[styles.text]}>{Lang_chg.FullName[config.language]}</Text>
+
+          <View
+            style={{
+              justifyContent: 'center',
+              paddingLeft: (mobileWidth * 5) / 100,
+            }}
+          >
+            <Text style={[styles.text]}>
+              {Lang_chg.FullName[config.language]}
+            </Text>
 
             <TextInput
               style={styles.inputContainerStyle}
@@ -671,7 +557,9 @@ const SignUp = ({ navigation, route }) => {
             {errors.name ? (
               <Text style={styles.errorText}>{errors.name}</Text>
             ) : null}
-            <Text style={[styles.text,]}>{Lang_chg.EmailAddress[config.language]} </Text>
+            <Text style={[styles.text]}>
+              {Lang_chg.EmailAddress[config.language]}{' '}
+            </Text>
             <TextInput
               style={styles.inputContainerStyle}
               placeholder={Lang_chg.EnterEmailtxt[config.language]}
@@ -685,7 +573,9 @@ const SignUp = ({ navigation, route }) => {
             {errors.email ? (
               <Text style={styles.errorText}>{errors.email}</Text>
             ) : null}
-            <Text style={[styles.text]}>{Lang_chg.MobileNumber[config.language]}</Text>
+            <Text style={[styles.text]}>
+              {Lang_chg.MobileNumber[config.language]}
+            </Text>
             <TextInput
               style={styles.inputContainerStyle}
               placeholder={Lang_chg.EnterPhoneNumber[config.language]}
@@ -704,26 +594,10 @@ const SignUp = ({ navigation, route }) => {
             {/* {tab === 'old' ? (
               <> */}
             {/* comment by gaurav */}
-            <Text style={[styles.text]}>{Lang_chg.Gender[config.language]} </Text>
-            {/* <Dropdown
-                  style={styles.inputContainerStyle}
-                  data={genderOptions}
-                   selectedTextStyle={{
-                color: Colors.placeholdertxtcolor,
-                left: (mobileWidth * 3) / 100,
-                fontSize: (mobileWidth * 3.4) / 100,
-              }}
-                  labelField="label"
-                  valueField="value"
-                  placeholderStyle={{ color: Colors.placeholdertxtcolor }}
-                  placeholder="   Select Gender"
-                  placeholderTextColor={Colors.placeholdertxtcolor}
-                  value={gender}
-                  onChange={item => {
-                    setGender(item.value);
-                    setErrors(prev => ({ ...prev, gender: '' }));
-                  }}
-                /> */}
+            <Text style={[styles.text]}>
+              {Lang_chg.Gender[config.language]}{' '}
+            </Text>
+
             <Dropdown
               style={styles.inputContainerStyle}
               data={genderOptions}
@@ -739,10 +613,9 @@ const SignUp = ({ navigation, route }) => {
                 setGender(item.value);
                 setErrors(prev => ({ ...prev, gender: '' }));
               }}
-              // Optional: use your own icon instead of default arrow
               renderRightIcon={() => (
                 <Image
-                  source={require('../Icons/dropppp.png')}
+                  source={require('../icons/dropppp.png')}
                   style={styles.customIcon}
                 />
               )}
@@ -750,27 +623,22 @@ const SignUp = ({ navigation, route }) => {
             {errors.gender ? (
               <Text style={styles.errorText}>{errors.gender}</Text>
             ) : null}
-            {/* </>
-            ) : null} */}
-            {/* comment by gaurav.... */}
 
             {tab === 'Current' ? (
-
               <View>
-                <Text style={[styles.text]}>{Lang_chg.Skills[config.language]} </Text>
+                <Text style={[styles.text]}>
+                  {Lang_chg.Skills[config.language]}{' '}
+                </Text>
                 <Dropdown
                   style={styles.inputContainerStyle}
                   data={businessOptions}
-                  labelField=" label"
+                  labelField="label"
                   valueField="value"
                   placeholder={Lang_chg.SelectSkills[config.language]}
                   placeholderStyle={{ color: Colors.loremtxt }}
-                  selectedTextStyle={{
-                    color: Colors.whitetxt,
-                    left: (mobileWidth * 3) / 100,
-                    fontSize: (mobileWidth * 3.4) / 100,
-                  }}
                   placeholderTextColor={Colors.placeholdertxtcolor}
+                  selectedTextStyle={styles.selectedTextStyle}
+                  iconStyle={styles.iconStyle}
                   value={business}
                   onChange={item => {
                     setBusiness(item.value);
@@ -778,7 +646,7 @@ const SignUp = ({ navigation, route }) => {
                   }}
                   renderRightIcon={() => (
                     <Image
-                      source={require('../Icons/dropppp.png')}
+                      source={require('../icons/dropppp.png')}
                       style={styles.customIcon}
                     />
                   )}
@@ -787,26 +655,36 @@ const SignUp = ({ navigation, route }) => {
                   <Text style={styles.errorText}>{errors.business}</Text>
                 ) : null}
               </View>
-            ) :
+            ) : (
               <></>
-            }
+            )}
 
-
-            <Text style={[styles.text]}>{Lang_chg.DateOfBirth[config.language]}</Text>
-            <View style={[styles.inputContainerStyle, { flexDirection: "row", justifyContent: "space-between", alignItems: "center" }]}>
-              {/* <TouchableOpacity style={{flexDirection:"row",justifyContent:"space-between",alignItems:"center"}} onPress={() => setShow(true)} > */}
+            <Text style={[styles.text]}>
+              {Lang_chg.DateOfBirth[config.language]}
+            </Text>
+            <View
+              style={[
+                styles.inputContainerStyle,
+                {
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                },
+              ]}
+            >
               <Text
                 style={{
                   color: dob ? Colors.whitetxt : Colors.loremtxt,
                   textAlign: 'center',
-
                 }}
               >
-                {dob || "select dob"}
-
+                {dob || Lang_chg.Select_Dob[config.language]}
               </Text>
               <TouchableOpacity onPress={() => setShow(true)}>
-                <Image style={styles.calender} source={require('../Icons/CalendarBlank.png')} />
+                <Image
+                  style={styles.calender}
+                  source={require('../icons/CalendarBlank.png')}
+                />
               </TouchableOpacity>
               {show && (
                 <DateTimePicker
@@ -817,27 +695,14 @@ const SignUp = ({ navigation, route }) => {
                   maximumDate={new Date()} // DOB should not be future date
                 />
               )}
-
             </View>
             {errors.dob ? (
               <Text style={[styles.errorText]}>{errors.dob}</Text>
             ) : null}
-            <Text style={[styles.text, { textAlign: "left" }]}>{Lang_chg.AadharNumber[config.language]}</Text>
-            {/* <View style={[styles.inputContainerStyle,{flexDirection:"row",justifyContent:"space-between"}]}>
-             <View>
-               <Image
-                style={styles.proofimage}
-                resizeMode="stretch"
-                source={proofimage == null ? {} : { uri: proofimage }}
-              ></Image>
-                {proofimage == null && (
-    <Text style={styles.proofPlaceholderText}>Enter ID Proof</Text>
-  )}
-  </View>
-             <TouchableOpacity onPress={() => setproofmodal(true)}>
-            <Image style={styles.downerrow} source={require('../Icons/downarrow.png')}/>
-          </TouchableOpacity>
-                      </View> */}
+            <Text style={[styles.text, { textAlign: 'left' }]}>
+              {Lang_chg.AadharNumber[config.language]}
+            </Text>
+
             <TextInput
               style={styles.inputContainerStyle}
               placeholder={Lang_chg.EnterAadharNumber[config.language]}
@@ -854,12 +719,13 @@ const SignUp = ({ navigation, route }) => {
               <Text style={styles.errorText}>{errors.Aadhar}</Text>
             ) : null}
 
-            <Text style={[styles.text]}>{Lang_chg.Password[config.language]} </Text>
+            <Text style={[styles.text]}>
+              {Lang_chg.Password[config.language]}{' '}
+            </Text>
             <TextInput
               style={styles.inputContainerStyle}
               placeholder={Lang_chg.EnterPasswordtxt[config.language]}
               placeholderTextColor={Colors.loremtxt}
-
               maxLength={20}
               value={password}
               onChangeText={text => {
@@ -870,12 +736,13 @@ const SignUp = ({ navigation, route }) => {
             {errors.password ? (
               <Text style={styles.errorText}>{errors.password}</Text>
             ) : null}
-            <Text style={[styles.text]}>{Lang_chg.ConfirmPassword[config.language]}  </Text>
+            <Text style={[styles.text]}>
+              {Lang_chg.ConfirmPassword[config.language]}{' '}
+            </Text>
             <TextInput
               style={styles.inputContainerStyle}
               placeholder={Lang_chg.ConfirmPassword[config.language]}
               placeholderTextColor={Colors.loremtxt}
-
               maxLength={20}
               value={confirmPassword}
               onChangeText={text => {
@@ -887,7 +754,9 @@ const SignUp = ({ navigation, route }) => {
               <Text style={styles.errorText}>{errors.confirmPassword}</Text>
             ) : null}
 
-            <Text style={[styles.text]}>{Lang_chg.Address[config.language]}  </Text>
+            <Text style={[styles.text]}>
+              {Lang_chg.Address[config.language]}{' '}
+            </Text>
 
             <TextInput
               style={[styles.inputContainerStyle, { height: inputHeight }]}
@@ -906,14 +775,30 @@ const SignUp = ({ navigation, route }) => {
             {errors.address ? (
               <Text style={styles.error}>{errors.address}</Text>
             ) : null}
-            <View style={[{ flexDirection: 'row', }, Lang_chg.City[config.language] == "City" ? { gap: 120 } : { gap: 125 }]}>
+            <View
+              style={[
+                { flexDirection: 'row' },
+                Lang_chg.City[config.language] == 'City'
+                  ? { gap: 120 }
+                  : { gap: 125 },
+              ]}
+            >
               <Text
-                style={[styles.citytext, { fontSize: (mobileWidth * 3.2) / 100, }]}
+                style={[
+                  styles.citytext,
+                  { fontSize: (mobileWidth * 3.2) / 100 },
+                ]}
               >
                 {Lang_chg.PinCode[config.language]}
               </Text>
               <Text
-                style={[styles.citytext, { left: (mobileWidth * 3) / 100, fontSize: (mobileWidth * 3.2) / 100, }]}
+                style={[
+                  styles.citytext,
+                  {
+                    left: (mobileWidth * 3) / 100,
+                    fontSize: (mobileWidth * 3.2) / 100,
+                  },
+                ]}
               >
                 {Lang_chg.City[config.language]}
               </Text>
@@ -927,22 +812,12 @@ const SignUp = ({ navigation, route }) => {
                   value={pincode}
                   keyboardType="number-pad"
                   onChangeText={handlePincodeChange}
-
                 />
                 {errors.pincode ? (
                   <Text style={styles.error}>{errors.pincode}</Text>
                 ) : null}
               </View>
               <View>
-
-
-                {/* <TextInput
-                  style={[styles.input, { left: (mobileWidth * 4) / 100 }]}
-                  placeholderTextColor={Colors.loremtxt}
-                  placeholder={Lang_chg.EnterCity[config.language]}
-                  value={city}
-                  onChangeText={handleCityChange}
-                /> */}
                 <TextInput
                   style={[styles.input, { left: (mobileWidth * 4) / 100 }]}
                   placeholderTextColor={Colors.loremtxt}
@@ -956,20 +831,35 @@ const SignUp = ({ navigation, route }) => {
                 ) : null}
               </View>
             </View>
-            <View style={[{ flexDirection: 'row', }, Lang_chg.City[config.language] == "City" ? { gap: 115 } : { gap: 125 }]}>
+            <View
+              style={[
+                { flexDirection: 'row' },
+                Lang_chg.City[config.language] == 'City'
+                  ? { gap: 115 }
+                  : { gap: 125 },
+              ]}
+            >
               <Text
-                style={[styles.citytext, { fontSize: (mobileWidth * 3.2) / 100, }]}
+                style={[
+                  styles.citytext,
+                  { fontSize: (mobileWidth * 3.2) / 100 },
+                ]}
               >
                 {Lang_chg.State[config.language]}
               </Text>
               <Text
-                style={[styles.citytext, { left: (mobileWidth * 10) / 100, fontSize: (mobileWidth * 3.2) / 100, }]}
+                style={[
+                  styles.citytext,
+                  {
+                    left: (mobileWidth * 10) / 100,
+                    fontSize: (mobileWidth * 3.2) / 100,
+                  },
+                ]}
               >
                 {Lang_chg.Country[config.language]}
               </Text>
             </View>
             <View style={{ flexDirection: 'row', gap: 20 }}>
-
               {/* <TextInput
                 style={[styles.input]}
                 placeholderTextColor={Colors.loremtxt}
@@ -985,13 +875,6 @@ const SignUp = ({ navigation, route }) => {
                 editable={false}
               />
 
-              {/* <TextInput
-                style={[styles.input]}
-                placeholderTextColor={Colors.loremtxt}
-                placeholder={Lang_chg.SelectCountry[config.language]}
-                value={country}
-                editable={false}
-              /> */}
               <TextInput
                 style={[styles.input]}
                 placeholderTextColor={Colors.loremtxt}
@@ -1000,22 +883,15 @@ const SignUp = ({ navigation, route }) => {
                 editable={false}
               />
             </View>
-            <View
-              style={{
-                borderRadius: 10,
-                borderWidth: 1,
-                width: "90%",
-                justifyContent: "center",
-                overflow: 'hidden',
-                alignSelf: 'center',
-                marginVertical: 20,
-                marginRight: 35
-              }}
-            >
-
+            <View style={styles.map_view}>
               <MapView
                 ref={mapRef}
-                style={{ width: mobileWidth * 0.87, height: mobileWidth * 0.42, borderRadius: 10, marginRight: 10 }}
+                style={{
+                  width: mobileWidth * 0.87,
+                  height: mobileWidth * 0.42,
+                  borderRadius: 10,
+                  marginRight: 10,
+                }}
                 initialRegion={{
                   latitude: lat || fallbackLat,
                   longitude: long || fallbackLong,
@@ -1037,23 +913,23 @@ const SignUp = ({ navigation, route }) => {
               >
                 {/* Conditionally render marker */}
 
-
                 {lat && long && (
                   <Marker
                     coordinate={{ latitude: lat, longitude: long }}
-                    image={require('../Icons/Location.png')}
+                    image={require('../icons/Location.png')}
                     title="Code Tech Infosystem Pvt Ltd."
                   />
                 )}
               </MapView>
-
             </View>
             <TouchableOpacity
               activeOpacity={0.8}
               style={styles.emailloginbutton}
               onPress={validateForm}
             >
-              <Text style={styles.mobileemailtext}>{Lang_chg.Register[config.language]} </Text>
+              <Text style={styles.mobileemailtext}>
+                {Lang_chg.Register[config.language]}{' '}
+              </Text>
             </TouchableOpacity>
           </View>
         </ScrollView>
@@ -1066,8 +942,8 @@ const styles = StyleSheet.create({
   error: {
     color: Colors.validatecolor,
     marginLeft: 4,
-    fontSize: mobileWidth * 4 / 100,
-    marginTop: mobileWidth * 2 / 100
+    fontSize: (mobileWidth * 4) / 100,
+    marginTop: (mobileWidth * 2) / 100,
   },
   dobBox: {
     borderWidth: 1,
@@ -1075,16 +951,25 @@ const styles = StyleSheet.create({
     padding: 14,
     borderRadius: 6,
   },
+  map_view: {
+    borderRadius: 10,
+    borderWidth: 1,
+    width: '90%',
+    justifyContent: 'center',
+    overflow: 'hidden',
+    alignSelf: 'center',
+    marginVertical: 20,
+    marginRight: 35,
+  },
   customIcon: {
-    width: mobileWidth * 2.2 / 100,
-    height: mobileWidth * 2.2 / 100,
-    right: mobileWidth * 4 / 100
+    width: (mobileWidth * 2.2) / 100,
+    height: (mobileWidth * 2.2) / 100,
+    right: (mobileWidth * 4) / 100,
   },
   proofPlaceholderText: {
     color: Colors.placeholdertxtcolor,
-    marginTop: mobileWidth * -4 / 100,
-    left: mobileWidth * 3 / 100,
-
+    marginTop: (mobileWidth * -4) / 100,
+    left: (mobileWidth * 3) / 100,
   },
   cancelbutton: {
     width: (mobileWidth * 25) / 100,
@@ -1098,11 +983,11 @@ const styles = StyleSheet.create({
     borderWidth: (mobileWidth * 0.2) / 100,
   },
   downerrow: {
-    width: mobileWidth * 3 / 100,
-    height: mobileWidth * 3 / 100,
+    width: (mobileWidth * 3) / 100,
+    height: (mobileWidth * 3) / 100,
     tintColor: Colors.placeholdertxtcolor,
-    margin: mobileWidth * 2 / 100,
-    marginTop: mobileWidth * 3 / 100
+    margin: (mobileWidth * 2) / 100,
+    marginTop: (mobileWidth * 3) / 100,
   },
   profileImage: {
     width: 100,
@@ -1139,10 +1024,10 @@ const styles = StyleSheet.create({
     marginTop: (mobileWidth * 4) / 100,
   },
   calender: {
-    width: mobileWidth * 5 / 100,
-    height: mobileWidth * 5 / 100,
+    width: (mobileWidth * 5) / 100,
+    height: (mobileWidth * 5) / 100,
     tintColor: Colors.whitetxt,
-    right: mobileWidth * 3 / 100
+    right: (mobileWidth * 3) / 100,
   },
   mobileemailtext: {
     color: Colors.whitetxt,
@@ -1196,9 +1081,9 @@ const styles = StyleSheet.create({
   proofimage: {
     width: (mobileWidth * 10) / 100,
     height: (mobileWidth * 7) / 100,
-    marginTop: mobileWidth * 1 / 100,
-    borderRadius: mobileWidth * 2 / 100,
-    left: mobileWidth * 2 / 100
+    marginTop: (mobileWidth * 1) / 100,
+    borderRadius: (mobileWidth * 2) / 100,
+    left: (mobileWidth * 2) / 100,
   },
 
   inputWrapper: {
@@ -1216,7 +1101,6 @@ const styles = StyleSheet.create({
     color: Colors.whitetxt,
     fontSize: (mobileWidth * 3.2) / 100,
     marginTop: (mobileWidth * 3) / 100,
-
   },
   textt: {
     color: Colors.whitetxt,
@@ -1289,7 +1173,7 @@ const styles = StyleSheet.create({
     borderRadius: (mobileWidth * 3) / 100,
     borderWidth: (mobileWidth * 0.2) / 100,
     marginTop: (mobileWidth * 3) / 100,
-    paddingLeft: 10
+    paddingLeft: 10,
   },
   inputaddressContainerStyle: {
     color: Colors.whitetxt,
@@ -1304,7 +1188,7 @@ const styles = StyleSheet.create({
   selectedTextStyle: {
     color: Colors.whitetxt,
     fontSize: (mobileWidth * 3) / 100,
-    left: mobileWidth * 2 / 100
+    left: (mobileWidth * 2) / 100,
   },
   dropdown: {
     borderColor: Colors.placeholdertxtcolor,
@@ -1336,7 +1220,6 @@ const styles = StyleSheet.create({
 });
 
 export default SignUp;
-
 
 // import React, { useState } from 'react';
 // import {

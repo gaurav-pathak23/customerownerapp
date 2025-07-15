@@ -1,7 +1,7 @@
 import { View, Text, Image, StyleSheet, FlatList, ScrollView, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Header from '../../components/Header'
-import { Colors } from '../../Colorfont/Color'
+import { Colors } from '../../themestyle/Color'
 import Select from '../../components/Select'
 import AdditionalServiceCard from '../../components/AdditionalServiceCard'
 
@@ -10,13 +10,13 @@ const AdditionalServicesData = [
     id: 1,
     title: "Bartender",
     price: 250,
-    source: require("../../Icons/Bartender.png")
+    source: require("../../icons/Bartender.png")
   },
   {
     id: 2,
     title: "Waiter",
     price: 350,
-    source: require("../../Icons/Waiter.png")
+    source: require("../../icons/Waiter.png")
   },
 ]
 
@@ -30,12 +30,12 @@ const Booking = ({ navigation }) => {
           <View style={styles.welcomeContainer}>
             <View style={styles.centeredView}>
               <Text style={styles.helloText}>HELLO RAJ</Text>
-              <Image source={require("../../Icons/HandsClapping.png")} />
+              <Image source={require("../../icons/HandsClapping.png")} />
             </View>
             <View style={styles.centeredView}>
-              <Image source={require("../../Icons/locationindicator.png")} />
+              <Image source={require("../../icons/locationindicator.png")} />
               <Text style={styles.locationText}>Indore, India </Text>
-              <Image source={require("../../Icons/down.png")} />
+              <Image source={require("../../icons/down.png")} />
             </View>
           </View>
           {/* //Welcome Location */}

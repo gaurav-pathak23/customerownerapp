@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet ,Dimensions, Image,SafeAreaView ,StatusBar ,TextInput ,TouchableOpacity } from 'react-native';
-import { Colors } from '../Colorfont/Color';
+import { Colors } from '../themestyle/Color';
 import { useNavigation, DrawerActions } from '@react-navigation/native';
 
 const mobileWidth = Dimensions.get('window').width;
@@ -18,17 +18,17 @@ const Header = ({ title ,value, onChangeText, placeholder = "Search..."}) => {
         
 
          <TouchableOpacity  onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
- <Image style={styles.headerlineimage} source={require('../Icons/line.png')}/>
+ <Image style={styles.headerlineimage} source={require('../icons/line.png')}/>
             </TouchableOpacity>
             
-            <Image style={styles.headerimages} source={require('../Icons/haathsath.png')}/>
+            <Image style={styles.headerimages} source={require('../icons/haathsath.png')}/>
 
-            <Image style={styles.headerbellimage} source={require('../Icons/Bell.png')}/>
+            <Image style={styles.headerbellimage} source={require('../icons/Bell.png')}/>
         </View>
         <View style={{flexDirection:"row",justifyContent:"space-between"}}>
         <View style={styles.searchContainer}>
       <Image
-        source={require('../Icons/search.png')}
+        source={require('../icons/search.png')}
         style={styles.searchIcon}
       />
       <TextInput
@@ -40,7 +40,7 @@ const Header = ({ title ,value, onChangeText, placeholder = "Search..."}) => {
     
       />
     </View>
- <Image style={styles.filterIcon} source={require('../Icons/filtericon.png')}/>
+ <Image style={styles.filterIcon} source={require('../icons/filtericon.png')}/>
 
     </View>
       

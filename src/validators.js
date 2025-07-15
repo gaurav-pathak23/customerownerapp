@@ -107,8 +107,8 @@
 
 
 
-import { Lang_chg } from "./Language/Language_provider";
-import { config } from "./Language/configProvider";
+import { Lang_chg } from "./language/Language_provider";
+import { config } from "./language/configProvider";
 export const regex = {
   image: /\.(jpg|jpeg|png)$/i,
   email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, // Simplified and correct email regex

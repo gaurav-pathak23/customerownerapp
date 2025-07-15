@@ -10,14 +10,14 @@ import {
 } from 'react-native';
 import React from 'react';
 import Header from '../../components/Header';
-import { Colors } from '../../Colorfont/Color';
+import { Colors } from '../../themestyle/Color';
 const mobileWidth = Dimensions.get('window').width;
 const Vendordata = [
   {
     id: '1',
     family: 'Chef de Cuisine',
     ex: '4+',
-    image: require('../../Icons/safeimage.png'),
+    image: require('../../icons/safeimage.png'),
     rating: '5',
     txt: 'seiqua. Ut enim ad minim veniam, qu aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit',
   },
@@ -25,7 +25,7 @@ const Vendordata = [
     id: '2',
     family: 'Head cheaf',
     ex: '4+',
-    image: require('../../Icons/Headchef.png'),
+    image: require('../../icons/Headchef.png'),
     txt: 'Ut enim ad minim veniam, quist aliquip ex ea commodo consequat. ure dolor in reprehenderit',
     rating: '3',
   },
@@ -34,7 +34,7 @@ const Vendordata = [
     family: 'Master chef',
     ex: '4+',
     rating: '3.8',
-    image: require('../../Icons/safeimage.png'),
+    image: require('../../icons/safeimage.png'),
     txt: 'sed do eiusmod tempo trud exercitation ullamco laboris nisi ut aliquipirure dolor in reprehenderit',
   },
   {
@@ -42,7 +42,7 @@ const Vendordata = [
     family: 'David chef',
     ex: '4+',
     rating: '4',
-    image: require('../../Icons/Headchef.png'),
+    image: require('../../icons/Headchef.png'),
     txt: 'sed do eiusmod m, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit',
   },
 ];
@@ -96,8 +96,8 @@ const Chef = ({ navigation }) => {
                         key={i}
                         source={
                           i < item.rating
-                            ? require('../../Icons/satrfull.png') // Red or colored star
-                            : require('../../Icons/starrrr.png')
+                            ? require('../../icons/satrfull.png') // Red or colored star
+                            : require('../../icons/starrrr.png')
                         }
                         style={styles.starIcon}
                       />

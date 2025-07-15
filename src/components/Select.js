@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image } from 'react-native'
 import React from 'react'
-import { Colors } from '../Colorfont/Color'
+import { Colors } from '../themestyle/Color'
 
 const Select = ({ lable, innerText }) => {
     return (
@@ -8,7 +8,7 @@ const Select = ({ lable, innerText }) => {
             <Text style={styles.label} >{lable} </Text>
             <View style={styles.selectWrapper}>
                 <Text style={styles.innerText}>{innerText}</Text>
-                <Image source={lable == "Food Serving Time" ? require("../Icons/Clock.png") : require("../Icons/down.png")} />
+                <Image source={lable == "Food Serving Time" ? require("../icons/Clock.png") : require("../icons/down.png")} />
             </View>
             {
                 lable == "Food Serving Time" && <View style={styles.bottom}>
